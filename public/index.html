@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>SciLit</title>
+  <link href="styles/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>
+    <h1>SciLit</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#actions"> Use Tool</a>
+    </nav>
+  </header>
+  <main>
+    <section id="landing">
+        <div id="landing-text">
+            <h2 class="section-heading">The Best Scientific Literature Manager</h2>
+            <p>Your platform for exploring and managing scientific literature.</p>
+        </div>
+        <img id="landing-image" src="styles/images/Reading image.jpg" alt="SciLit Image">
+    </section>
+    <section id="about">
+      <h2 class="section-heading">About The SciLit Application</h2>
+      <div id="about-container">
+          <div id="about-text">
+              <p> In the secluded valley, where whispers of ancient trees
+                 intertwined with the melody of a bubbling brook, a mysterious 
+                 energy lingered. Illuminated by the soft glow of fireflies, 
+                 the night unveiled secrets hidden in the tapestry of shadows.
+                  A lone wolf, its fur glistening in the moonlight, prowled with calculated grace. 
+                  Meanwhile, a solitary figure, cloaked in mystery, 
+                  traced constellations with nimble fingers. In the distance, a forgotten ruin stood as a 
+                  testament to the passage of time. The air carried the scent of wildflowers, painting the nocturnal 
+                  canvas with fragrant hues. Nature's nocturnal symphony orchestrated a mesmerizing dance beneath the 
+                  celestial dome.
+              </p>
+          </div>
+      </div>
+    </section>
+    <section id="actions">
+      <div class="action-row" id="addLiterature">
+        <h2 class="action-title">Add New Literature</h2>
+        <form id="inputForm">
+          <label for="documentTitle">Title:</label>
+          <br>
+          <input type="text" id="documentTitle" name="documentTitle" required>
+          <br>
+          <label for="documentAuthor">Author:</label>
+          <br>
+          <input type="text" id="documentAuthor" name="documentAuthor" required>
+          <br>
+          <label for="documentLink">DOI/Link:</label>
+          <br>
+          <input type="text" id="documentLink" name="documentLink" required>
+          <br>
+          <label for="documentType">Document Type:</label>
+          <br>
+          <select id="documentType" required>
+            <option value="book">Book</option>
+            <option value="journal">Journal</option>
+            <option value="other">Other</option>
+          </select>
+          <br>
+          <label for="documentAssignment">Assignment:</label>
+          <br>
+          <input type="text" id="documentAssignment" name="documentAssignment" required>
+          <br>
+          <label for="documentNotes">Notes:</label>
+          <br>
+          <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea>
+          <button type="submit">Add Document</button>
+        </form>
+      </div>
+
+      <div class="action-row" id="searchLiterature">
+        <h2 class="action-title">Search for Entries</h2>
+        <label for="searchInput">Enter DOI/Link:</label>
+        <br>
+        <input type="text" id="searchInput" required>
+        <br>
+        <button id="searchButton">Search</button>
+      </div>
+
+      <div class="action-row" id="deleteEntries">
+        <h2 class="action-title">Delete Entries</h2>
+        <label for="deleteInput">Enter DOI/Link:</label>
+        <br>
+        <input type="text" id="deleteInput" required>
+        <br>
+        <button id="deleteButton">Delete</button>
+      </div>
+
+      <div class="action-row" id="viewList">
+        <h2 class="action-title">View List</h2>
+        <button id="viewButton">Get All Documents</button>
+      </div>
+    </section>
+
+    <section class="responses" id="serverResponse">
+      <h2>Server Responses</h2>
+      <div id="responseBox"></div>
+    </section>
+    <section class="responses" id="literatureList">
+      <h2>Literature List</h2>
+      <ul id="literatureList"></ul>
+    </section>
+  </main>
+
+
+  <!-- script src="script.js"></script -->
+
+  <!-- script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script -->
+</body>
+
+</html>

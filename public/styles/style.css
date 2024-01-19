@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+*{
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    font-family: Montserrat, sans-serif;
+}
+
+
+
+header {
+    background-color: #fff;
+    color: #333;
+    padding: 1em 4%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+nav {
+display: flex;
+}
+
+nav a {
+margin-left: 20px;
+text-decoration: none;
+color: #333;
+transition: all 0.3s ease 0s; 
+}
+
+nav a:hover {
+color: #ff4d00;
+}
+
+main {
+    margin-top: 80px; /* Adjust the margin based on your header height */
+    padding: 2em;
+    max-width: 100%;
+}
+
+/*landing*/
+
+#landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Center the container and add space around it */
+  }
+
+#landing-text {
+    max-width: 400px;
+    margin-right: 50px;
+    position: relative;
+}
+
+.section-heading::before {
+    content: "";
+    position: absolute;
+    top: -5px; /* Adjust the position of the bar */
+    left: 0; /* Set left to 0 to span the entire width */
+    width: 100%; /* Set width to 100% to span the entire width */
+    height: 3px; /* Adjust the height of the bar */
+    background-color: #ff9800; /* Orange color */
+}
+
+.section-heading {
+    color: #333;
+    font-size: 24px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+
+#landing-image {
+    max-width: 600px;
+    max-height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow added */
+}
+
+/*about*/
+#about{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#about-container {
+    max-width: 500px;
+    width: 80%;
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+    border: 2px solid #ff4d00; /* Set border properties */
+    border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+  }
+
+  #about-text {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+/*actions*/
+
+
+#actions {
+  margin-top: 20px;
+  max-width: 33%; /* Set the max-width to 1/3 of the screen */
+  margin: 0 auto; /* Center the container */
+}
+
+.action-row {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Adjust the flex-direction to column */
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action-title {
+  color: #0088a9;
+  text-align: left; /* Align the titles to the left of the screen */
+}
+
+.action-form {
+  flex: 1;
+  margin-top: 10px; /* Add top margin for separation */
+  align-self: stretch; /* Ensure the form takes full width within the container */
+}
+
+label,
+input,
+select,
+textarea,
+button {
+  width: 100%; /* Make form elements take full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+button {
+  background-color: #0088a9;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #0088a9;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #006080;
+}
