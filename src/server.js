@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
 
 // database array to store all documents
 let documents = [];
+
+//cors middleware
+app.use(cors());
 
 // Json Parser Middleware
 app.use(bodyParser.json());

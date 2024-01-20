@@ -162,3 +162,48 @@ button {
 button:hover {
   background-color: #006080;
 }
+
+/*responses*/
+.responses {
+  margin-top: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #000; /* Change the border color to black */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+  color: #fff; /* Change the text color to white */
+}
+
+#serverResponse,
+#literatureList {
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff; /* Change the text color to white */
+  border: 2px solid #000; /* Change the border color to black */
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#literatureList {
+  border: 2px solid #000000; /* Change the border color for Search Results */
+}
+
+.responses h2 {
+  color: #ff4d00;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#serverResponse ul,
+#searchResultsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#serverResponse li,
+#searchResultsList li {
+  margin-bottom: 10px;
+}
