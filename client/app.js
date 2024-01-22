@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () =>{
-  
+    
+    //constants for html elements
     const inputForm = document.getElementById('inputForm');
     const viewButton = document.getElementById('viewButton');
     const searchButton = document.getElementById('searchButton');
+    const literatureListSection = document.getElementById('literatureListContainer');
   
     inputForm.addEventListener('submit', (event) =>{
       event.preventDefault();
@@ -34,23 +36,23 @@ document.addEventListener('DOMContentLoaded', () =>{
         body: JSON.stringify(newDocument), // convert json object to JSON string
       })
       .then(response => {
+        console.log('Response Status:', response.status);
         if (!response.ok){
           throw new Error('No network Response');
         }
-        return response.json();
+        return response.text();
       })
       .then(newDocumentData =>{
         console.log('Document added', newDocumentData);
-        displayerServerResponse(`Document added: ${newDocumentData.title}`); //!!! requires helper function
       })
       .catch(error =>{
-        //console.error('Error:', error);
-        displayerServerResponse(`Error adding document: ${error.message}`);
+        console.log(`Error adding document: ${error.message}`);
       });
       
       inputForm.reset(); // clear form
     });  
     
+    //get request to retrieve everything
     viewButton.addEventListener('click', ()=>{
       //send get request to /documents endpoint
       fetch('http://localhost:3000/documents')
@@ -62,11 +64,11 @@ document.addEventListener('DOMContentLoaded', () =>{
       })
       .then(documentData =>{
         console.log('Document data', documentData);
-        displayerServerResponse(`Document data: ${documentData}`);
+        displayDocumentData(documentData);
       })
       .catch(error =>{
-        console.error('Error:', error);
-        displayerServerResponse(`Error getting documents: ${error.message}`);
+        //console.error('Error:', error);
+        console.log(`Error getting documents: ${error.message}`);
       });
     });
   
@@ -86,26 +88,31 @@ document.addEventListener('DOMContentLoaded', () =>{
         displaySearchResults(documentData); // !!! requires helper function
       })
     });
+
+      //helper function to reset literaturelist
+  const resetLiteratureList = () =>{
+    literatureListSection.innerHTML = '';
+  }
+
+
+  //helper function to display list
+  const displayDocumentData = (documentData) => {
+      resetLiteratureList();
+      if (documentData.length > 0){
+        documentData.forEach(doc =>{
+          const newDocument = document.createElement('div');
+          newDocument.className = 'single-doc';
+          newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`
+          //newDocument.textContent = doc.title;
+          literatureListSection.appendChild(newDocument);
+        })
+      } else{
+        literatureListSection.innerHTML = '<p> No Documents Added </p>';
+      }
+  }
+  
     
   });
 
-//helper function to display server response
-function displayerServerResponse(message){
-    const serverResponse = document.getElementById('serverResponse');
-    serverResponse.textContent = message;
-}
 
-//helper function to display list
-function displayDocumentData(documentData){
-    const literatureListSection = document.getElementById('literatureList');
-    const ul = document.createElement('ul');
-
-    documentData.forEach(document =>{
-        const li = document.createElement('li');
-        li.textContent= `Title: ${document.title}, Author: ${document.author}, Link: ${document.link}, Type: ${document.type},
-         Assignment: ${document.assignment}, Notes: ${document.notes}`;
-        ul.appendChild(li);
-    });
-    literatureListSection.appendChild(ul);
-}
   
