@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       })
       .then(documentData =>{
         console.log('Document data', documentData);
-        displayDocumentData(documentData);
+        displayAllDocuments(documentData);
       })
       .catch(error =>{
         //console.error('Error:', error);
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     searchButton.addEventListener('click', ()=>{
       const searchTerm = document.getElementById('searchInput').value; //used for query
       const serverUrl = 'http://localhost:3000/documents/search';
-      const serverUrlQuery = `${serverUrl}?query=${searchTerm}`;
+      const serverUrlQuery = `${serverUrl}?link=${searchTerm}`;
   
       fetch(serverUrlQuery)
       .then(response => {
@@ -85,24 +85,28 @@ document.addEventListener('DOMContentLoaded', () =>{
         return response.json();
       })
       .then(documentData => {
-        displaySearchResults(documentData); // !!! requires helper function
+        console.log('Fetched document data:', documentData);
+        displayAllDocuments([documentData]); // !!! requires helper function
+      })
+      .catch(error => {
+        console.log(`Error processing response: ${error.message}`)
       })
     });
 
       //helper function to reset literaturelist
-  const resetLiteratureList = () =>{
+  const resetDisplaySection = () =>{
     literatureListSection.innerHTML = '';
   }
 
 
   //helper function to display list
-  const displayDocumentData = (documentData) => {
-      resetLiteratureList();
+  const displayAllDocuments = (documentData) => {
+      resetDisplaySection();
       if (documentData.length > 0){
         documentData.forEach(doc =>{
           const newDocument = document.createElement('div');
           newDocument.className = 'single-doc';
-          newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`
+          newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
           //newDocument.textContent = doc.title;
           literatureListSection.appendChild(newDocument);
         })
@@ -110,7 +114,21 @@ document.addEventListener('DOMContentLoaded', () =>{
         literatureListSection.innerHTML = '<p> No Documents Added </p>';
       }
   }
-  
+
+  //helper function to display single result
+  // const displaySingleSearchResult = (result) =>{
+  //   resetDisplaySection();
+  //   console.log('Result:', result); //debugging log
+  //   if (result){
+  //     const newDocument = document.createElement('div');
+  //     newDocument.className = 'single-doc';
+  //     //newDocument.textContent = result.title;
+  //     newDocument.innerHTML = `<div class = "title"> ${result}</div>`;
+  //     literatureListSection.appendChild(newDocument);
+  //   } else {
+  //     literatureListSection.innerHTML = '<p> No Documents Found </p>';
+  //   }
+  // };
     
   });
 

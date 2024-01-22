@@ -27,7 +27,7 @@ app.get('/documents/search', (req, res, next) =>{
     return res.status(400).send('No input found')
   }
 
-  const wantedDocument = documents.find((document) => document.id === providedLink);
+  const wantedDocument = documents.find((document) => document.link === providedLink);
 
   if (!wantedDocument){
     return res.status(400).send('Document not found')
