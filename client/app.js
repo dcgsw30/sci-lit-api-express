@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const inputForm = document.getElementById('inputForm');
     const viewButton = document.getElementById('viewButton');
     const searchButton = document.getElementById('searchButton');
+    const deleteButton = document.getElementById('deleteButton');
     const literatureListSection = document.getElementById('literatureListContainer');
   
     inputForm.addEventListener('submit', (event) =>{
@@ -71,7 +72,8 @@ document.addEventListener('DOMContentLoaded', () =>{
         console.log(`Error getting documents: ${error.message}`);
       });
     });
-  
+
+    //search Button
     searchButton.addEventListener('click', ()=>{
       const searchTerm = document.getElementById('searchInput').value; //used for query
       const serverUrl = 'http://localhost:3000/documents/search';
@@ -93,42 +95,56 @@ document.addEventListener('DOMContentLoaded', () =>{
       })
     });
 
-      //helper function to reset literaturelist
-  const resetDisplaySection = () =>{
-    literatureListSection.innerHTML = '';
-  }
-
-
-  //helper function to display list
-  const displayAllDocuments = (documentData) => {
-      resetDisplaySection();
-      if (documentData.length > 0){
-        documentData.forEach(doc =>{
-          const newDocument = document.createElement('div');
-          newDocument.className = 'single-doc';
-          newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
-          //newDocument.textContent = doc.title;
-          literatureListSection.appendChild(newDocument);
+    //delete Button
+    deleteButton.addEventListener('click', () => {
+      const deleteTerm = document.getElementById('deleteInput').value.trim();  // Trim to remove leading/trailing whitespaces
+      const serverUrl = 'http://localhost:3000/documents/';
+    
+      if (deleteTerm) {
+        const deleteUrl = `${serverUrl}${deleteTerm}`;
+    
+        // Perform DELETE request
+        fetch(deleteUrl, {
+          method: 'DELETE',
         })
-      } else{
-        literatureListSection.innerHTML = '<p> No Documents Added </p>';
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('No network response');
+            }
+            return response.text();
+          })
+          .then((result) => {
+            console.log('Document deleted:', result);
+          })
+          .catch((error) => {
+            console.log(`Error deleting document: ${error.message}`);
+          });
+      } else {
+        console.log('Invalid delete term. Provide a valid link.');
       }
-  }
+    });
 
-  //helper function to display single result
-  // const displaySingleSearchResult = (result) =>{
-  //   resetDisplaySection();
-  //   console.log('Result:', result); //debugging log
-  //   if (result){
-  //     const newDocument = document.createElement('div');
-  //     newDocument.className = 'single-doc';
-  //     //newDocument.textContent = result.title;
-  //     newDocument.innerHTML = `<div class = "title"> ${result}</div>`;
-  //     literatureListSection.appendChild(newDocument);
-  //   } else {
-  //     literatureListSection.innerHTML = '<p> No Documents Found </p>';
-  //   }
-  // };
+    //helper function to reset literaturelist
+    const resetDisplaySection = () =>{
+      literatureListSection.innerHTML = '';
+    }
+
+
+    //helper function to display list
+    const displayAllDocuments = (documentData) => {
+        resetDisplaySection();
+        if (documentData.length > 0){
+          documentData.forEach(doc =>{
+            const newDocument = document.createElement('div');
+            newDocument.className = 'single-doc';
+            newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
+            //newDocument.textContent = doc.title;
+            literatureListSection.appendChild(newDocument);
+          })
+        } else{
+          literatureListSection.innerHTML = '<p> No Documents Added </p>';
+        }
+    }
     
   });
 

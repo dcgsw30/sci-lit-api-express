@@ -47,8 +47,13 @@ app.post('/documents', (req, res, next) =>{
 // Delete New Literature
 app.delete('/documents/:link', (req, res, next) => {
   const documentLink = req.params.link;
-  documents = documents.filter((document) => document.id !== documentLink);
-  res.send(`The document has been removed`)
+  const removedDocument = documents.find((document) => document.link === documentLink);
+
+  if (!removedDocument){
+    return res.status(404).send(`No document with link/doi: ${documentLink}`)
+  }
+  documents = documents.filter((document) => document.link !== documentLink);
+  res.send(`The document with link/doi: ${removedDocument.title} has been removed`)
 });
 
 app.listen(PORT, () => {
