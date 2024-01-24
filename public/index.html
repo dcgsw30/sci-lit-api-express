@@ -10,7 +10,7 @@
 
 <body>
   <header>
-    <h1>SciLit</h1>
+    <img id="logo" src="styles/images/Sci-Lit-Logo.png">
     <nav>
       <a href="#about">About</a>
       <a href="#actions"> Use Tool</a>
@@ -21,6 +21,7 @@
         <div id="landing-text">
             <h2 class="section-heading">The Best Scientific Literature Manager</h2>
             <p>Your platform for exploring and managing scientific literature.</p>
+            <a href="#actions" class="use-button">Use Now!</a>
         </div>
         <img id="landing-image" src="styles/images/Reading image.jpg" alt="SciLit Image">
     </section>
@@ -44,7 +45,7 @@
     </section>
     <section id="actions">
       <div class="action-row" id="addLiterature">
-        <h2 class="action-title">Add New Literature</h2>
+        <h2 class="action-title">Add New Literature &#128213;</h2>
         <form id="inputForm">
           <label for="documentTitle">Title:</label>
           <br>
@@ -78,7 +79,7 @@
       </div>
 
       <div class="action-row" id="searchLiterature">
-        <h2 class="action-title">Search for Entries</h2>
+        <h2 class="action-title">Search for Entries &#128269;</h2>
         <label for="searchInput">Enter DOI/Link:</label>
         <br>
         <input type="text" id="searchInput" required>
@@ -87,7 +88,7 @@
       </div>
 
       <div class="action-row" id="deleteEntries">
-        <h2 class="action-title">Delete Entries</h2>
+        <h2 class="action-title">Delete Entries &#10060;</h2>
         <label for="deleteInput">Enter DOI/Link:</label>
         <br>
         <input type="text" id="deleteInput" required>
@@ -96,25 +97,30 @@
       </div>
 
       <div class="action-row" id="viewList">
-        <h2 class="action-title">View List</h2>
-        <button id="viewButton">Get All Documents</button>
+        <h2 class="action-title">View List &#x1F453;</h2>
+        <button id="viewButton">Fetch All Documents</button>
       </div>
     </section>
 
-    <section class="responses" id="serverResponse">
-      <h2>Server Responses</h2>
-      <div id="responseBox"></div>
-    </section>
     <section class="responses" id="literatureList">
-      <h2>Literature List</h2>
-      <ul id="literatureList"></ul>
+      <h2>Fetched Results</h2>
+      <div id="scrollableContainer">
+        <div id="headerRow" class="row">
+          <div class="label">Title &#128214</div>
+          <div class="label">Author &#128100</div>
+          <div class="label">DOI/Link &#128206</div>
+          <div class="label">Type &#x2753</div>
+          <div class="label">Which Assignment? &#129299</div>
+          <div class="label">Notes &#128221</div>
+        </div>
+        <div id="literatureListContainer"></div>
+      </div>
     </section>
   </main>
 
 
-  <!-- script src="script.js"></script -->
+  <script src="../client/app.js"></script>
 
-  <!-- script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script -->
 </body>
 
 </html>
