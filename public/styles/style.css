@@ -184,6 +184,17 @@ button:hover {
   background-color: #006080;
 }
 
+input[type="text"],
+select {
+  width: 100%; /* Make input fields and select boxes full-width */
+  padding: 8px;
+  margin: 6px 0;
+  box-sizing: border-box;
+}
+
+
+
+
 /*responses*/
 
 #scrollableContainer {

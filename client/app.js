@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       const link = document.getElementById('documentLink').value;
       const type = document.getElementById('documentType').value;
       const assignment = document.getElementById('documentAssignment').value;
-      const notes = document.getElementById('documentNotes').value;
+      const progress = document.getElementById('readingProgress').value;
   
       const newDocument ={
         title: title,
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         link: link,
         type: type,
         assignment: assignment,
-        notes: notes
+        progress: progress
       };
 
   
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                 <a href="${doc.link} class ="author">${doc.link}</a>
                 <div class="type">${doc.type}</div>
                 <div class="assignment">${doc.assignment}</div>
-                <div class="notes">${doc.notes}</div>
+                <div class="progress">${doc.progress}</div>
             </div>
         `;
             //newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
