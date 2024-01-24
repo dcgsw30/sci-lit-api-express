@@ -164,46 +164,53 @@ button:hover {
 }
 
 /*responses*/
-/* .responses {
-  margin-top: 20px;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 2px solid #000; 
+
+#scrollableContainer {
+  height: 300px;
+  overflow-y: auto;
+  border: 3px solid #ff4d00;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-height: 400px;
-  overflow-y: auto;
-  color: #fff; 
-}
-
-#serverResponse,
-#literatureList {
-  padding: 20px;
-  border-radius: 8px;
-  color: #fff; 
-  border: 2px solid #000; 
-  max-height: 300px;
-  overflow-y: auto;
-} */
-
-/* #literatureList {
-  border: 2px solid #000000; 
-} */
-
-/* .responses h2 {
-  color: #ff4d00;
+  padding: 10px;
   font-size: 20px;
-  margin-bottom: 10px;
 }
 
-#serverResponse ul,
-#searchResultsList {
-  list-style-type: none;
-  padding: 0;
+.row {
+  display: flex; /* Use flexbox for layout */
+  border-bottom: 5px solid black; /* Thin black line underneath */
+  background-color: #FFD700;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
-#serverResponse li,
-#searchResultsList li {
-  margin-bottom: 10px;
-} */
+.single-doc {
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.label {
+  flex: 1; /* Distribute available space evenly among labels */
+  padding: 10px; /* Add some padding for spacing */
+  text-align: center;
+}
+
+/* response rows*/
+.doc-info{
+  display: flex;
+}
+
+.doc-info > div,
+.doc-info > a {
+  flex: 1;
+  text-align: center;
+  font-size: 13px; 
+  word-wrap: break-word;
+}
+
+.even{
+  background-color: #f8f8f8;
+}
+
+.odd{
+  background-color: #ffffff;
+}

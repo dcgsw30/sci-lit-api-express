@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const searchButton = document.getElementById('searchButton');
     const deleteButton = document.getElementById('deleteButton');
     const literatureListSection = document.getElementById('literatureListContainer');
+    
   
     inputForm.addEventListener('submit', (event) =>{
       event.preventDefault();
@@ -134,10 +135,21 @@ document.addEventListener('DOMContentLoaded', () =>{
     const displayAllDocuments = (documentData) => {
         resetDisplaySection();
         if (documentData.length > 0){
-          documentData.forEach(doc =>{
+          documentData.forEach((doc, index) =>{
             const newDocument = document.createElement('div');
             newDocument.className = 'single-doc';
-            newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
+            newDocument.classList.add(index % 2 === 0 ? 'even' : 'odd');
+            newDocument.innerHTML = `
+            <div class="doc-info">
+                <div class="title">${doc.title}</div>
+                <div class="author">${doc.author}</div>
+                <a href="${doc.link} class ="author">${doc.link}</a>
+                <div class="type">${doc.type}</div>
+                <div class="assignment">${doc.assignment}</div>
+                <div class="notes">${doc.notes}</div>
+            </div>
+        `;
+            //newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
             //newDocument.textContent = doc.title;
             literatureListSection.appendChild(newDocument);
           })
