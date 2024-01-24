@@ -62,18 +62,24 @@
           <label for="documentType">Document Type:</label>
           <br>
           <select id="documentType" required>
-            <option value="book">Book</option>
-            <option value="journal">Journal</option>
-            <option value="other">Other</option>
+            <option value="Book">Book</option>
+            <option value="Journal">Journal</option>
+            <option value="Other">Other</option>
           </select>
           <br>
           <label for="documentAssignment">Assignment:</label>
           <br>
           <input type="text" id="documentAssignment" name="documentAssignment" required>
           <br>
-          <label for="documentNotes">Notes:</label>
+          <label for="readingProgress">Reading Progress:</label>
           <br>
-          <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea>
+          <select id="readingProgress" required>
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed!</option>
+          </select>
+          <!-- <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea> -->
+          <br>
           <button type="submit">Add Document</button>
         </form>
       </div>
@@ -111,7 +117,7 @@
           <div class="label">DOI/Link &#128206</div>
           <div class="label">Type &#x2753</div>
           <div class="label">Which Assignment? &#129299</div>
-          <div class="label">Notes &#128221</div>
+          <div class="label">Reading Progress &#128221</div>
         </div>
         <div id="literatureListContainer"></div>
       </div>
