@@ -130,11 +130,15 @@ main {
   }
 
 /*actions*/
-
+.actions-heading {
+  color: #0088a9;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
 #actions {
   margin-top: 20px;
-  max-width: 33%; /* Set the max-width to 1/3 of the screen */
+  max-width: 100%; /* Set the max-width to 100% to span the entire screen */
   margin: 0 auto; /* Center the container */
 }
 
@@ -144,9 +148,9 @@ main {
   flex-direction: column; /* Adjust the flex-direction to column */
 }
 
-.action-container {
+.actions-container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 

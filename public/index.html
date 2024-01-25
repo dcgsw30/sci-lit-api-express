@@ -44,67 +44,70 @@
       </div>
     </section>
     <section id="actions">
-      <div class="action-row" id="addLiterature">
-        <h2 class="action-title">Add New Literature &#128213;</h2>
-        <form id="inputForm">
-          <label for="documentTitle">Title:</label>
-          <br>
-          <input type="text" id="documentTitle" name="documentTitle" required>
-          <br>
-          <label for="documentAuthor">Author:</label>
-          <br>
-          <input type="text" id="documentAuthor" name="documentAuthor" required>
-          <br>
-          <label for="documentLink">DOI/Link:</label>
-          <br>
-          <input type="text" id="documentLink" name="documentLink" required>
-          <br>
-          <label for="documentType">Document Type:</label>
-          <br>
-          <select id="documentType" required>
-            <option value="Book">Book</option>
-            <option value="Journal">Journal</option>
-            <option value="Other">Other</option>
-          </select>
-          <br>
-          <label for="documentAssignment">Assignment:</label>
-          <br>
-          <input type="text" id="documentAssignment" name="documentAssignment" required>
-          <br>
-          <label for="readingProgress">Reading Progress:</label>
-          <br>
-          <select id="readingProgress" required>
-            <option value="Not Started">Not Started</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed!</option>
-          </select>
-          <!-- <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea> -->
-          <br>
-          <button type="submit">Add Document</button>
-        </form>
-      </div>
+      <h2 class="actions-heading">Actions</h2>
+      <div class="actions-container">
+        <div class="action-row" id="addLiterature">
+          <h2 class="action-title">Add New Literature &#128213;</h2>
+          <form id="inputForm">
+            <label for="documentTitle">Title:</label>
+            <br>
+            <input type="text" id="documentTitle" name="documentTitle" required>
+            <br>
+            <label for="documentAuthor">Author:</label>
+            <br>
+            <input type="text" id="documentAuthor" name="documentAuthor" required>
+            <br>
+            <label for="documentLink">DOI/Link:</label>
+            <br>
+            <input type="text" id="documentLink" name="documentLink" required>
+            <br>
+            <label for="documentType">Document Type:</label>
+            <br>
+            <select id="documentType" required>
+              <option value="Book">Book</option>
+              <option value="Journal">Journal</option>
+              <option value="Other">Other</option>
+            </select>
+            <br>
+            <label for="documentAssignment">Assignment:</label>
+            <br>
+            <input type="text" id="documentAssignment" name="documentAssignment" required>
+            <br>
+            <label for="readingProgress">Reading Progress:</label>
+            <br>
+            <select id="readingProgress" required>
+              <option value="Not Started">Not Started</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed!</option>
+            </select>
+            <!-- <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea> -->
+            <br>
+            <button type="submit">Add Document</button>
+          </form>
+        </div>
 
-      <div class="action-row" id="searchLiterature">
-        <h2 class="action-title">Search for Entries &#128269;</h2>
-        <label for="searchInput">Enter DOI/Link:</label>
-        <br>
-        <input type="text" id="searchInput" required>
-        <br>
-        <button id="searchButton">Search</button>
-      </div>
+        <div class="action-row" id="searchLiterature">
+          <h2 class="action-title">Search for Entries &#128269;</h2>
+          <label for="searchInput">Enter DOI/Link:</label>
+          <br>
+          <input type="text" id="searchInput" required>
+          <br>
+          <button id="searchButton">Search</button>
+        </div>
 
-      <div class="action-row" id="deleteEntries">
-        <h2 class="action-title">Delete Entries &#10060;</h2>
-        <label for="deleteInput">Enter DOI/Link:</label>
-        <br>
-        <input type="text" id="deleteInput" required>
-        <br>
-        <button id="deleteButton">Delete</button>
-      </div>
+        <div class="action-row" id="deleteEntries">
+          <h2 class="action-title">Delete Entries &#10060;</h2>
+          <label for="deleteInput">Enter DOI/Link:</label>
+          <br>
+          <input type="text" id="deleteInput" required>
+          <br>
+          <button id="deleteButton">Delete</button>
+        </div>
 
-      <div class="action-row" id="viewList">
-        <h2 class="action-title">View List &#x1F453;</h2>
-        <button id="viewButton">Fetch All Documents</button>
+        <div class="action-row" id="viewList">
+          <h2 class="action-title">View List &#x1F453;</h2>
+          <button id="viewButton">Fetch All Documents</button>
+        </div>
       </div>
     </section>
 
