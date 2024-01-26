@@ -114,15 +114,19 @@
     <section class="responses" id="literatureList">
       <h2>Fetched Results</h2>
       <div id="scrollableContainer">
-        <div id="headerRow" class="row">
-          <div class="label">Title &#128214</div>
-          <div class="label">Author &#128100</div>
-          <div class="label">DOI/Link &#128206</div>
-          <div class="label">Type &#x2753</div>
-          <div class="label">Which Assignment? &#129299</div>
-          <div class="label">Reading Progress &#128221</div>
-        </div>
-        <div id="literatureListContainer"></div>
+        <table id="documentTable">
+          <thead>
+            <tr>
+              <th>Title &#128214</th>
+              <th>Author &#128100</th>
+              <th>DOI/Link &#128206</th>
+              <th>Type  &#x2753</th>
+              <th>Which Assignment? &#129299</th>
+              <th>Reading Progress &#128221</th>
+            </tr>
+          </thead>
+          <tbody id="literatureListContainer"></tbody>
+        </table>
       </div>
     </section>
   </main>

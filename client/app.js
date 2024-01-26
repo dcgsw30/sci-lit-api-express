@@ -125,38 +125,64 @@ document.addEventListener('DOMContentLoaded', () =>{
       }
     });
 
+    
+
     //helper function to reset literaturelist
     const resetDisplaySection = () =>{
       literatureListSection.innerHTML = '';
     }
 
+    //helper function that returns suitable class name
+    const getProgressClassName = (progress) =>{
+      if (progress === 'Not Started'){
+        return 'not-started';
+      } else if (progress === 'In Progress'){
+        return 'in-progress';
+      } else if (progress === 'Completed'){
+        return 'completed';
+      } else{
+        return '';
+      }
+    }
 
     //helper function to display list
     const displayAllDocuments = (documentData) => {
-        resetDisplaySection();
-        if (documentData.length > 0){
-          documentData.forEach((doc, index) =>{
-            const newDocument = document.createElement('div');
-            newDocument.className = 'single-doc';
-            newDocument.classList.add(index % 2 === 0 ? 'even' : 'odd');
-            newDocument.innerHTML = `
-            <div class="doc-info">
-                <div class="title">${doc.title}</div>
-                <div class="author">${doc.author}</div>
-                <a href="${doc.link} class ="author">${doc.link}</a>
-                <div class="type">${doc.type}</div>
-                <div class="assignment">${doc.assignment}</div>
-                <div class="progress">${doc.progress}</div>
-            </div>
-        `;
-            //newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
-            //newDocument.textContent = doc.title;
-            literatureListSection.appendChild(newDocument);
-          })
-        } else{
-          literatureListSection.innerHTML = '<p> No Documents Added </p>';
-        }
-    }
+      resetDisplaySection();
+      if (documentData.length > 0) {
+        documentData.forEach((doc, index) => {
+
+          const newRow = literatureListSection.insertRow();
+          newRow.className = index % 2 === 0 ? 'even' : 'odd';
+
+          const progressClassName = getProgressClassName(doc.progress); 
+
+          const cellTitle = newRow.insertCell(0);
+          cellTitle.textContent = doc.title;
+
+          const cellAuthor = newRow.insertCell(1);
+          cellAuthor.textContent = doc.author;
+
+          const cellLink = newRow.insertCell(2);
+          cellLink.textContent = doc.link;
+
+          const cellType = newRow.insertCell(3);
+          cellType.textContent = doc.type;
+
+          const cellAssignment = newRow.insertCell(4);
+          cellAssignment.textContent = doc.assignment;
+
+          const cellProgress = newRow.insertCell(5);
+          cellProgress.textContent = doc.progress;
+          cellProgress.classList.add(progressClassName);
+
+          });
+      } else {
+        const emptyRow = literatureListSection.insertRow();
+        const cell = emptyRow.insertCell(0);
+        cell.colSpan = 6;
+        cell.textContent = 'No Documents Added';
+      }
+    };
     
   });
 

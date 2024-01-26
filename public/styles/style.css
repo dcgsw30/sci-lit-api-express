@@ -40,7 +40,7 @@ transition: all 0.3s ease 0s;
 }
 
 nav a:hover {
-color: #ff9800;
+color: #3498db;
 }
 
 main {
@@ -71,7 +71,7 @@ main {
     left: 0; /* Set left to 0 to span the entire width */
     width: 100%; /* Set width to 100% to span the entire width */
     height: 3px; /* Adjust the height of the bar */
-    background-color: #ff9800; /* Orange color */
+    background-color: #3498db; 
 }
 
 .section-heading {
@@ -93,7 +93,7 @@ main {
 .use-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #ff0000; /* You can change the background color */
+  background-color: #3498db; /* You can change the background color */
   color: #fff; /* You can change the text color */
   border-radius: 50px; /* Use a high value to create a pill shape */
   text-decoration: none;
@@ -151,11 +151,11 @@ main {
 .actions-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .action-title {
-  color: #0088a9;
+  color: #3498db;
   text-align: left; /* Align the titles to the left of the screen */
 }
 
@@ -175,11 +175,11 @@ button {
 }
 
 button {
-  background-color: #0088a9;
+  background-color: #3498db;
   color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
-  border: 2px solid #0088a9;
+  border: 2px solid #3498db;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
@@ -204,43 +204,43 @@ select {
 #scrollableContainer {
   height: 300px;
   overflow-y: auto;
-  border: 3px solid #ff4d00;
-  border-radius: 10px;
-  padding: 10px;
   font-size: 20px;
 }
 
-.row {
-  display: flex; /* Use flexbox for layout */
-  border-bottom: 5px solid black; /* Thin black line underneath */
-  background-color: #FFD700;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+#documentTable {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.single-doc {
-  border-bottom: 1px solid black;
-  padding-bottom: 10px;
+#documentTable thead {
+  background-color: #3498db; /* Header background color */
+  color: #fff; /* Header text color */
 }
 
-.label {
-  flex: 1; /* Distribute available space evenly among labels */
-  padding: 10px; /* Add some padding for spacing */
-  text-align: center;
+#documentTable th {
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+  width: calc(100% / 6); /* Divide the width equally among the 6 columns */
 }
 
+#documentTable tbody tr:hover {
+  background-color: #bcebb9; /* Highlight on hover */
+}
 /* response rows*/
-.doc-info{
-  display: flex;
+.not-started {
+  background-color: rgb(125, 125, 251); 
+  color: white; 
 }
 
-.doc-info > div,
-.doc-info > a {
-  flex: 1;
-  text-align: center;
-  font-size: 13px; 
-  word-wrap: break-word;
+.in-progress {
+  background-color: rgb(169, 168, 168); 
+  color: white; 
+}
+
+.completed {
+  background-color: rgb(53, 183, 53); 
+  color: white; 
 }
 
 .even{
