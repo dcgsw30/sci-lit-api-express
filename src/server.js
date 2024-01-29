@@ -56,6 +56,29 @@ app.delete('/documents/:link', (req, res, next) => {
   res.send(`The document with link/doi: ${removedDocument.title} has been removed`)
 });
 
+app.put('/documents/:link', (req, res, next) =>{
+  const linkToUpdate = req.params.link;
+  const updatedDocument = req.body;
+
+  const documentToUpdate = documents.find((doc) => doc.link === linkToUpdate);
+
+  if(!documentToUpdate){
+    return res.status(404).send('Document not found');
+  }
+  const indexOfUpdatedDocument = documents.indexOf(documentToUpdate);
+  
+  //debugging console logs
+  console.log('Before Update:', documents[indexOfUpdatedDocument]);
+  console.log('Updating with:', updatedDocument);
+
+  documents[indexOfUpdatedDocument] = updatedDocument;
+
+  console.log('After Update:', documents[indexOfUpdatedDocument]);
+
+  res.json(updatedDocument);
+
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

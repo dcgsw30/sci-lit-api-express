@@ -207,6 +207,8 @@ document.addEventListener('DOMContentLoaded', () =>{
         const retrievedDocuments = await fetchDocumentHelper();
         const editTargetDocument = retrievedDocuments[documentIndex];
 
+        console.log('Going to udpate the original file:', editTargetDocument);
+
         const newTitle = prompt('Enter new title:', editTargetDocument.title);
         const newAuthor = prompt('Enter new author:', editTargetDocument.author);
         const newLink = prompt('Enter new link:', editTargetDocument.link);
@@ -214,12 +216,22 @@ document.addEventListener('DOMContentLoaded', () =>{
         const newAssignment = prompt('Enter new assignment:', editTargetDocument.assignment);
         const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed!', editTargetDocument.progress);
 
+        const updatedDocument ={
+          title: newTitle,
+          author: newAuthor,
+          link: newLink,
+          type: newType,
+          assignment: newAssignment,
+          progress: newProgress
+        };
+
+        const updateResponse = await updateDocument(editTargetDocument.link, updatedDocument);
+        console.log("Updated document into:", updateResponse);
 
       } catch (error) {
         console.error('Error in editData function:', errormessage);
       }
     };
-
 
     // fetch helper, returns array from database 
     const fetchDocumentHelper = () =>{
@@ -235,8 +247,29 @@ document.addEventListener('DOMContentLoaded', () =>{
         });
     };
 
+    //PUT request helper, edits the data in the server
+    const updateDocument = async (targetDocumentLink, updatedDocument) =>{
+      const updateRoute = `http://localhost:3000/documents/${targetDocumentLink}`
+      try{
+        const response = await fetch (updateRoute, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedDocument),
+        });
 
+        //debug console log message
+        console.log('PUT Response:', response);
 
+        if(!response.ok){
+          throw new Error('Failed to updated');
+        }
+        return response.json();
+      } catch (error) {
+        console.error('Error updating document:', error.message);
+      }
+    };
     
   });
 
