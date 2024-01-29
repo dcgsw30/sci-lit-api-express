@@ -125,8 +125,6 @@ document.addEventListener('DOMContentLoaded', () =>{
       }
     });
 
-    
-
     //helper function to reset literaturelist
     const resetDisplaySection = () =>{
       literatureListSection.innerHTML = '';
@@ -175,6 +173,23 @@ document.addEventListener('DOMContentLoaded', () =>{
           cellProgress.textContent = doc.progress;
           cellProgress.classList.add(progressClassName);
 
+          const cellActions = newRow.insertCell(6);
+
+          const cellEditButton = document.createElement('button');
+          cellEditButton.className = 'small-edit-button';
+          cellEditButton.textContent = 'Edit';
+          cellEditButton.addEventListener('click', (event)=> { //!!! TODO CREATE HELPERS
+            editData(event);
+          });
+          cellActions.appendChild(cellEditButton);
+          
+          const cellDeleteButton = document.createElement('button');
+          cellDeleteButton.className = 'small-delete-button';
+          cellDeleteButton.textContent = 'Delete';
+          cellDeleteButton.addEventListener('click', () =>{  //!!! TODO CREATE HELPERS
+            console.log('Delete Button clicked');
+          });
+          cellActions.appendChild(cellDeleteButton);
           });
       } else {
         const emptyRow = literatureListSection.insertRow();
@@ -183,6 +198,45 @@ document.addEventListener('DOMContentLoaded', () =>{
         cell.textContent = 'No Documents Added';
       }
     };
+
+    //ASYNC edit data function
+    const editData = async (event) =>{
+      try{
+        const rowIndex = event.target.closest('tr').rowIndex;
+        const documentIndex = rowIndex - 1;
+        const retrievedDocuments = await fetchDocumentHelper();
+        const editTargetDocument = retrievedDocuments[documentIndex];
+
+        const newTitle = prompt('Enter new title:', editTargetDocument.title);
+        const newAuthor = prompt('Enter new author:', editTargetDocument.author);
+        const newLink = prompt('Enter new link:', editTargetDocument.link);
+        const newType = prompt('Enter new type: Choose Book, Journal, or Other', editTargetDocument.type);
+        const newAssignment = prompt('Enter new assignment:', editTargetDocument.assignment);
+        const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed!', editTargetDocument.progress);
+
+
+      } catch (error) {
+        console.error('Error in editData function:', errormessage);
+      }
+    };
+
+
+    // fetch helper, returns array from database 
+    const fetchDocumentHelper = () =>{
+      return fetch('http://localhost:3000/documents')
+        .then(response =>{
+          if (!response.ok){
+            throw new Error ('Failed to fetch')
+          }
+          return response.json();
+        })
+        .catch(error =>{
+          console.error('Error fetching document:', error.message);
+        });
+    };
+
+
+
     
   });
 

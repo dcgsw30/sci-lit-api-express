@@ -221,13 +221,14 @@ select {
   padding: 15px;
   text-align: left;
   font-weight: bold;
-  width: calc(100% / 6); /* Divide the width equally among the 6 columns */
+  width: calc(100% / 7); /* Divide the width equally among the 6 columns */
 }
 
 #documentTable tbody tr:hover {
   background-color: #bcebb9; /* Highlight on hover */
 }
 /* response rows*/
+
 .not-started {
   background-color: rgb(125, 125, 251); 
   color: white; 
