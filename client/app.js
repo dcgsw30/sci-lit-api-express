@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const inputForm = document.getElementById('inputForm');
     const viewButton = document.getElementById('viewButton');
     const searchButton = document.getElementById('searchButton');
-    const deleteButton = document.getElementById('deleteButton');
+    const filterProgressButton = document.getElementById('filterProgressButton');
     const literatureListSection = document.getElementById('literatureListContainer');
     
   
@@ -75,56 +75,47 @@ document.addEventListener('DOMContentLoaded', () =>{
       });
     });
 
-    //search Button
-    searchButton.addEventListener('click', ()=>{
-      const searchTerm = document.getElementById('searchInput').value; //used for query
-      const serverUrl = 'http://localhost:3000/documents/search';
-      const serverUrlQuery = `${serverUrl}?link=${searchTerm}`;
-  
-      fetch(serverUrlQuery)
-      .then(response => {
-        if (!response.ok){
-          throw new Error('No network response');
-      }
-        return response.json();
-      })
-      .then(documentData => {
-        console.log('Fetched document data:', documentData);
-        displayAllDocuments([documentData]); // !!! requires helper function
-      })
-      .catch(error => {
-        console.log(`Error processing response: ${error.message}`)
-      })
+    //Search button
+    searchButton.addEventListener('click', () =>{
+      const searchTerm = document.getElementById('searchInput').value;
+      fetchQueryData(searchTerm);
     });
 
-    //delete Button
-    deleteButton.addEventListener('click', () => {
-      const deleteTerm = document.getElementById('deleteInput').value.trim();  // Trim to remove leading/trailing whitespaces
-      const serverUrl = 'http://localhost:3000/documents/';
+    //Progress filter button
+    filterProgressButton.addEventListener('click', () =>{
+      const filterTerm = document.getElementById('filterProgress').value;
+      fetchQueryData(filterTerm);
+    })
+
+
+    //General purpose helper function for queries
+    const fetchQueryData = async (queryTerm) => {
+      const progressChoices = ["Not Started", "In Progress", "Completed"];
     
-      if (deleteTerm) {
-        const deleteUrl = `${serverUrl}${deleteTerm}`;
+      let serverUrl, serverUrlQuery;
     
-        // Perform DELETE request
-        fetch(deleteUrl, {
-          method: 'DELETE',
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('No network response');
-            }
-            return response.json();
-          })
-          .then((resultAfterDelete) => {
-            displayAllDocuments(resultAfterDelete);
-          })
-          .catch((error) => {
-            console.log(`Error deleting document: ${error.message}`);
-          });
+      if (progressChoices.includes(queryTerm)) {
+        serverUrl = 'http://localhost:3000/documents/searchProgress';
+        serverUrlQuery = `${serverUrl}?progress=${queryTerm}`;
       } else {
-        console.log('Invalid delete term. Provide a valid link.');
+        serverUrl = 'http://localhost:3000/documents/search';
+        serverUrlQuery = `${serverUrl}?link=${queryTerm}`;
       }
-    });
+    
+      try {
+        const response = await fetch(serverUrlQuery);
+    
+        if (!response.ok) {
+          throw new Error('No network response');
+        }
+    
+        const documentData = await response.json();
+        console.log('Fetched document data:', documentData);
+        displayAllDocuments(documentData);
+      } catch (error) {
+        console.log(`Error processing response: ${error.message}`);
+      }
+    };
 
     //helper function to reset literaturelist
     const resetDisplaySection = () =>{

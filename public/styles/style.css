@@ -229,6 +229,11 @@ select {
 }
 /* response rows*/
 
+.small-edit-button,
+.small-delete-button {
+  background-color: #de3030;
+}
+
 .not-started {
   background-color: rgb(125, 125, 251); 
   color: white; 

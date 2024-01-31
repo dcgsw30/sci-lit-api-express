@@ -88,6 +88,7 @@
 
         <div class="action-row" id="searchLiterature">
           <h2 class="action-title">Search for Entries &#128269;</h2>
+          <h4>Note! All links should be unique</h4>
           <label for="searchInput">Enter DOI/Link:</label>
           <br>
           <input type="text" id="searchInput" required>
@@ -95,13 +96,17 @@
           <button id="searchButton">Search</button>
         </div>
 
-        <div class="action-row" id="deleteEntries">
-          <h2 class="action-title">Delete Entries &#10060;</h2>
-          <label for="deleteInput">Enter DOI/Link:</label>
+        <div class="action-row" id="filterEntries">
+          <h2 class="action-title">Filter By Progress &#9989;</h2>
+          <label for="filterProgress">Select Progress:</label>
           <br>
-          <input type="text" id="deleteInput" required>
+          <select id="filterProgress" required>
+            <option value="Not Started">Not Started &#128557</option>
+            <option value="In Progress">In Progress &#128572</option>
+            <option value="Completed">Completed &#129321</option>
+         </select>
           <br>
-          <button id="deleteButton">Delete</button>
+          <button id="filterProgressButton">Filter</button>
         </div>
 
         <div class="action-row" id="viewList">
@@ -121,8 +126,8 @@
               <th>Author &#128100</th>
               <th>DOI/Link &#128206</th>
               <th>Type  &#x2753</th>
-              <th>Which Assignment? &#129299</th>
-              <th>Reading Progress &#128221</th>
+              <th>Assignment &#129299</th>
+              <th>Progress &#128221</th>
               <th>Action &#128295</th>
             </tr>
           </thead>

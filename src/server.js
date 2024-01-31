@@ -19,7 +19,7 @@ app.get('/documents', (req, res, next) =>{
   res.json(documents);
 });
 
-// Search for Literature
+// Search for Literature by DOI
 app.get('/documents/search', (req, res, next) =>{
   const providedLink = req.query.link;
 
@@ -33,7 +33,25 @@ app.get('/documents/search', (req, res, next) =>{
     return res.status(400).send('Document not found')
   }
 
-  res.json(wantedDocument);
+  res.json([wantedDocument]);
+
+});
+
+// Filter by progress
+app.get('/documents/searchProgress', (req, res, next) =>{
+  const providedProgress = req.query.progress;
+
+  if(!providedProgress ){
+    return res.status(400).send('No input found')
+  }
+
+  const wantedDocuments = documents.filter((document) => document.progress === providedProgress);
+
+  if (wantedDocuments.length === 0){
+    return res.status(400).send('Document not found')
+  }
+
+  res.json(wantedDocuments);
 
 });
 
