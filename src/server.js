@@ -19,7 +19,7 @@ app.get('/documents', (req, res, next) =>{
   res.json(documents);
 });
 
-// Search for Literature
+// Search for Literature by DOI
 app.get('/documents/search', (req, res, next) =>{
   const providedLink = req.query.link;
 
@@ -33,7 +33,25 @@ app.get('/documents/search', (req, res, next) =>{
     return res.status(400).send('Document not found')
   }
 
-  res.json(wantedDocument);
+  res.json([wantedDocument]);
+
+});
+
+// Filter by progress
+app.get('/documents/searchProgress', (req, res, next) =>{
+  const providedProgress = req.query.progress;
+
+  if(!providedProgress ){
+    return res.status(400).send('No input found')
+  }
+
+  const wantedDocuments = documents.filter((document) => document.progress === providedProgress);
+
+  if (wantedDocuments.length === 0){
+    return res.status(400).send('Document not found')
+  }
+
+  res.json(wantedDocuments);
 
 });
 
@@ -41,7 +59,7 @@ app.get('/documents/search', (req, res, next) =>{
 app.post('/documents', (req, res, next) =>{
   const newDocument = req.body;
   documents.push(newDocument);
-  res.send(`The document ${newDocument.title} has been added!`)
+  res.json(documents);
 });
 
 // Delete New Literature
@@ -53,7 +71,30 @@ app.delete('/documents/:link', (req, res, next) => {
     return res.status(404).send(`No document with link/doi: ${documentLink}`)
   }
   documents = documents.filter((document) => document.link !== documentLink);
-  res.send(`The document with link/doi: ${removedDocument.title} has been removed`)
+  res.json(documents);
+});
+
+app.put('/documents/:link', (req, res, next) =>{
+  const linkToUpdate = req.params.link;
+  const updatedDocument = req.body;
+
+  const documentToUpdate = documents.find((doc) => doc.link === linkToUpdate);
+
+  if(!documentToUpdate){
+    return res.status(404).send('Document not found');
+  }
+  const indexOfUpdatedDocument = documents.indexOf(documentToUpdate);
+  
+  //debugging console logs
+  console.log('Before Update:', documents[indexOfUpdatedDocument]);
+  console.log('Updating with:', updatedDocument);
+
+  documents[indexOfUpdatedDocument] = updatedDocument;
+
+  console.log('After Update:', documents[indexOfUpdatedDocument]);
+
+  res.json(documents);
+
 });
 
 app.listen(PORT, () => {

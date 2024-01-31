@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const inputForm = document.getElementById('inputForm');
     const viewButton = document.getElementById('viewButton');
     const searchButton = document.getElementById('searchButton');
-    const deleteButton = document.getElementById('deleteButton');
+    const filterProgressButton = document.getElementById('filterProgressButton');
     const literatureListSection = document.getElementById('literatureListContainer');
     
   
@@ -42,10 +42,11 @@ document.addEventListener('DOMContentLoaded', () =>{
         if (!response.ok){
           throw new Error('No network Response');
         }
-        return response.text();
+        return response.json();
       })
       .then(newDocumentData =>{
         console.log('Document added', newDocumentData);
+        displayAllDocuments(newDocumentData);
       })
       .catch(error =>{
         console.log(`Error adding document: ${error.message}`);
@@ -74,89 +75,230 @@ document.addEventListener('DOMContentLoaded', () =>{
       });
     });
 
-    //search Button
-    searchButton.addEventListener('click', ()=>{
-      const searchTerm = document.getElementById('searchInput').value; //used for query
-      const serverUrl = 'http://localhost:3000/documents/search';
-      const serverUrlQuery = `${serverUrl}?link=${searchTerm}`;
-  
-      fetch(serverUrlQuery)
-      .then(response => {
-        if (!response.ok){
-          throw new Error('No network response');
-      }
-        return response.json();
-      })
-      .then(documentData => {
-        console.log('Fetched document data:', documentData);
-        displayAllDocuments([documentData]); // !!! requires helper function
-      })
-      .catch(error => {
-        console.log(`Error processing response: ${error.message}`)
-      })
+    //Search button
+    searchButton.addEventListener('click', () =>{
+      const searchTerm = document.getElementById('searchInput').value;
+      fetchQueryData(searchTerm);
     });
 
-    //delete Button
-    deleteButton.addEventListener('click', () => {
-      const deleteTerm = document.getElementById('deleteInput').value.trim();  // Trim to remove leading/trailing whitespaces
-      const serverUrl = 'http://localhost:3000/documents/';
+    //Progress filter button
+    filterProgressButton.addEventListener('click', () =>{
+      const filterTerm = document.getElementById('filterProgress').value;
+      fetchQueryData(filterTerm);
+    })
+
+
+    //General purpose helper function for queries
+    const fetchQueryData = async (queryTerm) => {
+      const progressChoices = ["Not Started", "In Progress", "Completed"];
     
-      if (deleteTerm) {
-        const deleteUrl = `${serverUrl}${deleteTerm}`;
+      let serverUrl, serverUrlQuery;
     
-        // Perform DELETE request
-        fetch(deleteUrl, {
-          method: 'DELETE',
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('No network response');
-            }
-            return response.text();
-          })
-          .then((result) => {
-            console.log('Document deleted:', result);
-          })
-          .catch((error) => {
-            console.log(`Error deleting document: ${error.message}`);
-          });
+      if (progressChoices.includes(queryTerm)) {
+        serverUrl = 'http://localhost:3000/documents/searchProgress';
+        serverUrlQuery = `${serverUrl}?progress=${queryTerm}`;
       } else {
-        console.log('Invalid delete term. Provide a valid link.');
+        serverUrl = 'http://localhost:3000/documents/search';
+        serverUrlQuery = `${serverUrl}?link=${queryTerm}`;
       }
-    });
+    
+      try {
+        const response = await fetch(serverUrlQuery);
+    
+        if (!response.ok) {
+          throw new Error('No network response');
+        }
+    
+        const documentData = await response.json();
+        console.log('Fetched document data:', documentData);
+        displayAllDocuments(documentData);
+      } catch (error) {
+        console.log(`Error processing response: ${error.message}`);
+      }
+    };
 
     //helper function to reset literaturelist
     const resetDisplaySection = () =>{
       literatureListSection.innerHTML = '';
     }
 
+    //helper function that returns suitable class name
+    const getProgressClassName = (progress) =>{
+      if (progress === 'Not Started'){
+        return 'not-started';
+      } else if (progress === 'In Progress'){
+        return 'in-progress';
+      } else if (progress === 'Completed'){
+        return 'completed';
+      } else{
+        return '';
+      }
+    }
 
     //helper function to display list
     const displayAllDocuments = (documentData) => {
-        resetDisplaySection();
-        if (documentData.length > 0){
-          documentData.forEach((doc, index) =>{
-            const newDocument = document.createElement('div');
-            newDocument.className = 'single-doc';
-            newDocument.classList.add(index % 2 === 0 ? 'even' : 'odd');
-            newDocument.innerHTML = `
-            <div class="doc-info">
-                <div class="title">${doc.title}</div>
-                <div class="author">${doc.author}</div>
-                <a href="${doc.link} class ="author">${doc.link}</a>
-                <div class="type">${doc.type}</div>
-                <div class="assignment">${doc.assignment}</div>
-                <div class="progress">${doc.progress}</div>
-            </div>
-        `;
-            //newDocument.innerHTML = `<div class= "title"> ${doc.title}</div>`;
-            //newDocument.textContent = doc.title;
-            literatureListSection.appendChild(newDocument);
-          })
-        } else{
-          literatureListSection.innerHTML = '<p> No Documents Added </p>';
+      resetDisplaySection();
+      if (documentData.length > 0) {
+        documentData.forEach((doc, index) => {
+
+          const newRow = literatureListSection.insertRow();
+          newRow.className = index % 2 === 0 ? 'even' : 'odd';
+
+          const progressClassName = getProgressClassName(doc.progress); 
+
+          const cellTitle = newRow.insertCell(0);
+          cellTitle.textContent = doc.title;
+
+          const cellAuthor = newRow.insertCell(1);
+          cellAuthor.textContent = doc.author;
+
+          const cellLink = newRow.insertCell(2);
+          cellLink.textContent = doc.link;
+
+          const cellType = newRow.insertCell(3);
+          cellType.textContent = doc.type;
+
+          const cellAssignment = newRow.insertCell(4);
+          cellAssignment.textContent = doc.assignment;
+
+          const cellProgress = newRow.insertCell(5);
+          cellProgress.textContent = doc.progress;
+          cellProgress.classList.add(progressClassName);
+
+          const cellActions = newRow.insertCell(6);
+
+          const cellEditButton = document.createElement('button');
+          cellEditButton.className = 'small-edit-button';
+          cellEditButton.textContent = 'Edit';
+          cellEditButton.addEventListener('click', (event)=> { //!!! TODO CREATE HELPERS
+            editData(event);
+          });
+          cellActions.appendChild(cellEditButton);
+          
+          const cellDeleteButton = document.createElement('button');
+          cellDeleteButton.className = 'small-delete-button';
+          cellDeleteButton.textContent = 'Delete';
+          cellDeleteButton.addEventListener('click', (event) =>{  //!!! TODO CREATE HELPERS
+            deleteData(event);
+          });
+          cellActions.appendChild(cellDeleteButton);
+          });
+      } else {
+        const emptyRow = literatureListSection.insertRow();
+        const cell = emptyRow.insertCell(0);
+        cell.colSpan = 6;
+        cell.textContent = 'No Documents Added';
+      }
+    };
+
+    //ASYNC delete data function
+    const deleteData = async (event) =>{
+      try{
+        const rowIndex = event.target.closest('tr').rowIndex;
+        const documentIndex = rowIndex - 1;
+        const retrievedDocuments = await fetchDocumentHelper();
+        const deleteTargetDocument = retrievedDocuments[documentIndex];
+
+        const documentsAfterDelete = await deleteDocument(deleteTargetDocument.link);
+        displayAllDocuments(documentsAfterDelete);
+
+      } catch (error){
+        console.error('error in deleteData function:', error.message);
+      }
+    };
+    
+
+    //ASYNC edit data function
+    const editData = async (event) =>{
+      try{
+        const rowIndex = event.target.closest('tr').rowIndex;
+        const documentIndex = rowIndex - 1;
+        const retrievedDocuments = await fetchDocumentHelper();
+        const editTargetDocument = retrievedDocuments[documentIndex];
+
+        console.log('Going to udpate the original file:', editTargetDocument);
+
+        const newTitle = prompt('Enter new title:', editTargetDocument.title);
+        const newAuthor = prompt('Enter new author:', editTargetDocument.author);
+        const newLink = prompt('Enter new link:', editTargetDocument.link);
+        const newType = prompt('Enter new type: Choose Book, Journal, or Other', editTargetDocument.type);
+        const newAssignment = prompt('Enter new assignment:', editTargetDocument.assignment);
+        const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed', editTargetDocument.progress);
+
+        const updatedDocument ={
+          title: newTitle,
+          author: newAuthor,
+          link: newLink,
+          type: newType,
+          assignment: newAssignment,
+          progress: newProgress
+        };
+
+        const updateResponse = await updateDocument(editTargetDocument.link, updatedDocument);
+        displayAllDocuments(updateResponse);
+
+      } catch (error) {
+        console.error('Error in editData function:', error.message);
+      }
+    };
+
+    // fetch helper, returns array from database 
+    const fetchDocumentHelper = () =>{
+      return fetch('http://localhost:3000/documents')
+        .then(response =>{
+          if (!response.ok){
+            throw new Error ('Failed to fetch')
+          }
+          return response.json();
+        })
+        .catch(error =>{
+          console.error('Error fetching document:', error.message);
+        });
+    };
+
+    //DELETE request helper, delete the data in the server and returns updated list
+    const deleteDocument = async (targetDocumentLink) =>{
+      const deleteRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+      try{
+        const response = await fetch (deleteRoute, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (!response.ok){
+          throw new Error ('Failed to delete document');
         }
+        return response.json();
+      } catch (error){
+        console.error('Error deleting document:', error.message);
+      }
     }
+
+    //PUT request helper, edits the data in the server and returns updated list
+    const updateDocument = async (targetDocumentLink, updatedDocument) =>{
+      const updateRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+      try{
+        const response = await fetch (updateRoute, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedDocument),
+        });
+
+        //debug console log message
+        console.log('PUT Response:', response);
+
+        if(!response.ok){
+          throw new Error('Failed to updated');
+        }
+        return response.json();
+      } catch (error) {
+        console.error('Error updating document:', error.message);
+      }
+    };
     
   });
 
