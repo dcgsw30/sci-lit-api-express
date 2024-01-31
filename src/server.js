@@ -41,7 +41,7 @@ app.get('/documents/search', (req, res, next) =>{
 app.post('/documents', (req, res, next) =>{
   const newDocument = req.body;
   documents.push(newDocument);
-  res.send(`The document ${newDocument.title} has been added!`)
+  res.json(documents);
 });
 
 // Delete New Literature
@@ -53,7 +53,7 @@ app.delete('/documents/:link', (req, res, next) => {
     return res.status(404).send(`No document with link/doi: ${documentLink}`)
   }
   documents = documents.filter((document) => document.link !== documentLink);
-  res.send(`The document with link/doi: ${removedDocument.title} has been removed`)
+  res.json(documents);
 });
 
 app.put('/documents/:link', (req, res, next) =>{
@@ -75,7 +75,7 @@ app.put('/documents/:link', (req, res, next) =>{
 
   console.log('After Update:', documents[indexOfUpdatedDocument]);
 
-  res.json(updatedDocument);
+  res.json(documents);
 
 });
 

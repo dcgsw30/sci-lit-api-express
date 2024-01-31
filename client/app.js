@@ -42,10 +42,11 @@ document.addEventListener('DOMContentLoaded', () =>{
         if (!response.ok){
           throw new Error('No network Response');
         }
-        return response.text();
+        return response.json();
       })
       .then(newDocumentData =>{
         console.log('Document added', newDocumentData);
+        displayAllDocuments(newDocumentData);
       })
       .catch(error =>{
         console.log(`Error adding document: ${error.message}`);
@@ -112,10 +113,10 @@ document.addEventListener('DOMContentLoaded', () =>{
             if (!response.ok) {
               throw new Error('No network response');
             }
-            return response.text();
+            return response.json();
           })
-          .then((result) => {
-            console.log('Document deleted:', result);
+          .then((resultAfterDelete) => {
+            displayAllDocuments(resultAfterDelete);
           })
           .catch((error) => {
             console.log(`Error deleting document: ${error.message}`);
@@ -186,8 +187,8 @@ document.addEventListener('DOMContentLoaded', () =>{
           const cellDeleteButton = document.createElement('button');
           cellDeleteButton.className = 'small-delete-button';
           cellDeleteButton.textContent = 'Delete';
-          cellDeleteButton.addEventListener('click', () =>{  //!!! TODO CREATE HELPERS
-            console.log('Delete Button clicked');
+          cellDeleteButton.addEventListener('click', (event) =>{  //!!! TODO CREATE HELPERS
+            deleteData(event);
           });
           cellActions.appendChild(cellDeleteButton);
           });
@@ -198,6 +199,23 @@ document.addEventListener('DOMContentLoaded', () =>{
         cell.textContent = 'No Documents Added';
       }
     };
+
+    //ASYNC delete data function
+    const deleteData = async (event) =>{
+      try{
+        const rowIndex = event.target.closest('tr').rowIndex;
+        const documentIndex = rowIndex - 1;
+        const retrievedDocuments = await fetchDocumentHelper();
+        const deleteTargetDocument = retrievedDocuments[documentIndex];
+
+        const documentsAfterDelete = await deleteDocument(deleteTargetDocument.link);
+        displayAllDocuments(documentsAfterDelete);
+
+      } catch (error){
+        console.error('error in deleteData function:', error.message);
+      }
+    };
+    
 
     //ASYNC edit data function
     const editData = async (event) =>{
@@ -214,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         const newLink = prompt('Enter new link:', editTargetDocument.link);
         const newType = prompt('Enter new type: Choose Book, Journal, or Other', editTargetDocument.type);
         const newAssignment = prompt('Enter new assignment:', editTargetDocument.assignment);
-        const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed!', editTargetDocument.progress);
+        const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed', editTargetDocument.progress);
 
         const updatedDocument ={
           title: newTitle,
@@ -226,10 +244,10 @@ document.addEventListener('DOMContentLoaded', () =>{
         };
 
         const updateResponse = await updateDocument(editTargetDocument.link, updatedDocument);
-        console.log("Updated document into:", updateResponse);
+        displayAllDocuments(updateResponse);
 
       } catch (error) {
-        console.error('Error in editData function:', errormessage);
+        console.error('Error in editData function:', error.message);
       }
     };
 
@@ -247,9 +265,29 @@ document.addEventListener('DOMContentLoaded', () =>{
         });
     };
 
-    //PUT request helper, edits the data in the server
+    //DELETE request helper, delete the data in the server and returns updated list
+    const deleteDocument = async (targetDocumentLink) =>{
+      const deleteRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+      try{
+        const response = await fetch (deleteRoute, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        if (!response.ok){
+          throw new Error ('Failed to delete document');
+        }
+        return response.json();
+      } catch (error){
+        console.error('Error deleting document:', error.message);
+      }
+    }
+
+    //PUT request helper, edits the data in the server and returns updated list
     const updateDocument = async (targetDocumentLink, updatedDocument) =>{
-      const updateRoute = `http://localhost:3000/documents/${targetDocumentLink}`
+      const updateRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
       try{
         const response = await fetch (updateRoute, {
           method: 'PUT',
