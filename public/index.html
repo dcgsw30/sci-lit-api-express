@@ -19,11 +19,12 @@
   <main>
     <section id="landing">
         <div id="landing-text">
-            <h2 class="section-heading">The Best Scientific Literature Manager</h2>
-            <p>Your platform for exploring and managing scientific literature.</p>
+            <h2 class="section-heading">Welcome to a new age of scientific research</h2>
+            <p id="dynamic-paragraph">
+              Your platform for <span id="dynamic-words">exploring</span>, <span id="dynamic-words">tracking</span>, and <span id="dynamic-words">managing</span> scientific literature.
+            </p>
             <a href="#actions" class="use-button">Use Now!</a>
         </div>
-        <img id="landing-image" src="styles/images/Reading image.jpg" alt="SciLit Image">
     </section>
     <section id="about">
       <h2 class="section-heading">About The SciLit Application</h2>
@@ -128,7 +129,7 @@
               <th>Type  &#x2753</th>
               <th>Assignment &#129299</th>
               <th>Progress &#128221</th>
-              <th>Action &#128295</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody id="literatureListContainer"></tbody>
@@ -139,6 +140,7 @@
 
 
   <script src="../client/app.js"></script>
+  <script src="script.js"></script>
 
 </body>
 
