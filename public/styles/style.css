@@ -56,7 +56,7 @@ main {
   justify-content: center;
   align-items: center;
   height: 90vh;
-  background-color: #87cfff;
+  background-color: #C0D7FB;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -69,50 +69,90 @@ main {
 }
 
 .section-heading {
-  color: #fff; /* White text color */
+  color: #3E5DD2; /* White text color */
   font-size: 60px; /* Adjust the font size */
   line-height: 1.5;
   margin-bottom: 25px;
 }
 
-
-#dynamic-paragraph {
-  font-size: 24px; /* Adjust the font size for the bottom paragraph */
-  line-height: 1.6;
-  color: #fff; /* White text color */
+#landing-text h1{
+  color: #647494;
 }
 
-/* #dynamic-words {
+.c1{
   display: inline-block;
-  color: #3498db; 
-  border-right: 2px solid #3498db; 
-  animation: typing-animation 3s steps(15, end) infinite; 
-} */
+  color: #647494;
+}
+.c2{
+  display: inline-block;
+  color: #647494;
+}
+.c3{
+  display: inline-block;
+  color: #647494;
+}
+.c4{
+  display: inline-block;
+  color: #6555E7;
+}
 
-
-/* @keyframes typing-animation {
-  from {
+h1{
+  font-size: 2.8rem;
+  margin-top: 1%;
+}
+h1 .type{
+    font-size: 2.5rem;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap; 
     width: 0;
-  }
-  to {
-    width: 100%;
-  }
-} */
-
-.use-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #3498db;
-  color: #fff;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+    animation: 
+      typing 1.5s steps(30, end) forwards;
+}
+h1 .type2{
+    font-size: 2.5rem; 
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap; 
+    width: 0;
+    animation: 
+      typing 1.5s steps(30, end) forwards;
+    animation-delay: 1.5s;
+}
+h1 .type3{
+    font-size: 2.5rem; 
+    overflow: hidden;
+    border-right: .15em solid orange; 
+    white-space: nowrap; 
+    width: 0;
+    animation: 
+      typing 2s steps(30, end) forwards;
+    animation-delay: 3s;
+}
+h1 .type4{
+  font-size: 2.5rem; 
+  overflow: hidden;
+  margin-top: 6%;
+  border-right: .15em solid orange; 
+  white-space: nowrap; 
+  width: 0;
+  animation: 
+      typing 2s steps(30, end) forwards,
+      blink .75s infinite;
+  animation-delay: 5.5s;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink {
+  from { border-color: transparent }
+  to { border-color: orange; }
 }
 
-.use-button:hover {
-  background-color: #ea7b04;
+a:visited {
+  color: #000000; /* Change the link color after clicking */
 }
-
 /*about*/
 #about{
     margin-top: 100px;
@@ -124,25 +164,46 @@ main {
 }
 
 #about-container {
-    max-width: 500px;
-    width: 80%;
-    text-align: center;
-    padding: 20px;
-    margin: 0 auto;
-    border: 2px solid #ff9800; /* Set border properties */
-    border-radius: 10px; /* Optional: Add border-radius for rounded corners */
-  }
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Space items evenly along the main axis */
+  align-items: center; /* Center items along the cross axis */
+}
 
-  #about-text {
-    font-size: 18px;
-    line-height: 1.6;
-  }
+#about-text {
+  flex: 1; /* Take up remaining space */
+  max-width: 60%; /* Adjust the maximum width for text */
+  font-size: 22px; 
+}
 
+#about-image {
+  flex: 1; /* Take up remaining space */
+  max-width: 40%; /* Adjust the maximum width for the image */
+}
+
+#about-image img {
+  width: 100%; /* Make the image fill its container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+}
+
+#about-image {
+  animation: floatAnimation 3s infinite alternate ease-in-out;
+}
+
+@keyframes floatAnimation {
+  0% {
+      transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-20px);
+  }
+}
 /*actions*/
 .actions-heading {
-  color: #3498db;
+  color: #3E5DD2;
   margin-bottom: 20px;
   text-align: center;
+  font-size: 60px;
 }
 
 #actions {
@@ -172,7 +233,7 @@ main {
 }
 
 .action-title {
-  color: #3498db;
+  color: #3E5DD2;
   text-align: left; /* Align the titles to the left of the screen */
 }
 
@@ -192,11 +253,11 @@ button {
 }
 
 button {
-  background-color: #3498db;
+  background-color: #3E5DD2;
   color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
-  border: 2px solid #3498db;
+  border: 2px solid #3E5DD2;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
@@ -232,8 +293,8 @@ select {
 
 
 #documentTable thead {
-  background-color: #3498db; /* Header background color */
-  color: #fff; /* Header text color */
+  background-color: #C0D7FB; /* Header background color */
+  color: black; /* Header text color */
   border-bottom: 2px solid #000;
   position: sticky;
   top: 0;
