@@ -10,7 +10,7 @@
 
 <body>
   <header>
-    <img id="logo" src="styles/images/Sci-Lit-Logo.png">
+    <img id="logo" src="styles/images/Logo2.png">
     <nav>
       <a href="#about">About</a>
       <a href="#actions"> Use Tool</a>
@@ -23,7 +23,7 @@
             <h1>SciLit can help you<br></br><div class="c1"><div class="type">Manage your scientific literature</div></div>
             </br>
             <div class="c2"><div class="type2">Track reading progress</div></div></br>
-            <div class="c3"><div class="type3">Support your research needs</div></div><br></br>
+            <div class="c3"><div class="type3">Generate citations for publication</div></div><br></br>
             <div class="c4"><div class="type4"><a href="#actions">Get started today</a></div></div></h1>
         </div>
     </section>
@@ -66,17 +66,13 @@
             <br>
             <input type="text" id="documentLink" name="documentLink" required>
             <br>
-            <label for="documentType">Document Type:</label>
+            <label for="documentJournal">Journal:</label>
             <br>
-            <select id="documentType" required>
-              <option value="Book">Book</option>
-              <option value="Journal">Journal</option>
-              <option value="Other">Other</option>
-            </select>
+            <input type="text" id="documentJournal" name="documentJournal" required>
             <br>
-            <label for="documentAssignment">Assignment:</label>
+            <label for="documentVolumePage">Volume,Page:</label>
             <br>
-            <input type="text" id="documentAssignment" name="documentAssignment" required>
+            <input type="text" id="documentVolumePage" name="documentVolumePage" required>
             <br>
             <label for="readingProgress">Reading Progress:</label>
             <br>
@@ -85,7 +81,6 @@
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed!</option>
             </select>
-            <!-- <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea> -->
             <br>
             <button type="submit">Add Document</button>
           </form>
@@ -130,8 +125,8 @@
               <th>Title &#128214</th>
               <th>Author &#128100</th>
               <th>DOI/Link &#128206</th>
-              <th>Type  &#x2753</th>
-              <th>Assignment &#129299</th>
+              <th>Journal  &#x2753</th>
+              <th>Volume,Page &#129299</th>
               <th>Progress &#128221</th>
               <th>Actions</th>
             </tr>
@@ -140,6 +135,32 @@
         </table>
       </div>
     </section>
+
+    <section id="generateCitations">
+      <br></br>
+      <br></br>
+      <br></br>
+      <p id="generateCitationText">I want to generate my citations in 
+        <select id="citationStyle">
+          <option value="apa">APA</option>
+          <option value="mla">MLA</option>
+        </select>
+      </p>
+      <button>Generate now!</button>
+    </section>
+
+    <section class="responses" id="citationList">
+      <br></br>
+
+      <h2>Citation Results</h2>
+      <div id="placeholder">
+        <table id="citationTable">
+          <tbody id="citationListContainer"></tbody>
+        </table>
+      </div>
+
+    </section>
+
   </main>
 
 

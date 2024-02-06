@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', () =>{
       const title = document.getElementById('documentTitle').value;
       const author = document.getElementById('documentAuthor').value;
       const link = document.getElementById('documentLink').value;
-      const type = document.getElementById('documentType').value;
-      const assignment = document.getElementById('documentAssignment').value;
+      const journal = document.getElementById('documentJournal').value;
+      const volumepage = document.getElementById('documentVolumePage').value;
       const progress = document.getElementById('readingProgress').value;
   
       const newDocument ={
         title: title,
         author: author,
         link: link,
-        type: type,
-        assignment: assignment,
+        journal: journal,
+        volumepage: volumepage,
         progress: progress
       };
 
@@ -155,11 +155,11 @@ document.addEventListener('DOMContentLoaded', () =>{
           const cellLink = newRow.insertCell(2);
           cellLink.textContent = doc.link;
 
-          const cellType = newRow.insertCell(3);
-          cellType.textContent = doc.type;
+          const cellJournal = newRow.insertCell(3);
+          cellJournal.textContent = doc.journal;
 
-          const cellAssignment = newRow.insertCell(4);
-          cellAssignment.textContent = doc.assignment;
+          const cellVolumePage = newRow.insertCell(4);
+          cellVolumePage.textContent = doc.volumepage;
 
           const cellProgress = newRow.insertCell(5);
           cellProgress.textContent = doc.progress;
@@ -221,16 +221,16 @@ document.addEventListener('DOMContentLoaded', () =>{
         const newTitle = prompt('Enter new title:', editTargetDocument.title);
         const newAuthor = prompt('Enter new author:', editTargetDocument.author);
         const newLink = prompt('Enter new link:', editTargetDocument.link);
-        const newType = prompt('Enter new type: Choose Book, Journal, or Other', editTargetDocument.type);
-        const newAssignment = prompt('Enter new assignment:', editTargetDocument.assignment);
+        const newJournal = prompt('Enter new journal:', editTargetDocument.journal);
+        const newVolumePage = prompt('Enter new Volume,Page:', editTargetDocument.volumepage);
         const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed', editTargetDocument.progress);
 
         const updatedDocument ={
           title: newTitle,
           author: newAuthor,
           link: newLink,
-          type: newType,
-          assignment: newAssignment,
+          journal: newJournal,
+          volumepage: newVolumePage,
           progress: newProgress
         };
 
