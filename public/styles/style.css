@@ -287,8 +287,8 @@ select {
 }
 
 #documentTable {
-  width: 120%;
-  border-collapse: collapse;
+  width: 150%; /* Adjust the percentage as needed */
+  table-layout: fixed;
 }
 
 
@@ -301,13 +301,21 @@ select {
   z-index: 1;
 }
 
-#documentTable th {
-  padding: 15px;
-  text-align: left;
-  font-weight: bold;
-  width: calc(120% / 7); /* Divide the width equally among the 6 columns */
+#documentTable th, #documentTable td {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+#documentTable th:nth-child(1),
+#documentTable td:nth-child(2),
+#documentTable td:nth-child(3),
+#documentTable td:nth-child(4),
+#documentTable td:nth-child(5),
+#documentTable td:nth-child(6),
+#documentTable td:nth-child(7),
+#documentTable td:nth-child(8) {
+  width: 12.5%; /* Adjust the percentage for each column as needed */
+}
 
 #documentTable tbody tr:hover {
   background-color: #bcebb9; /* Highlight on hover */
@@ -373,4 +381,6 @@ select {
   border: 2px solid #000;
 }
 
-
+#citationTable tr {
+  height: 30px; 
+}

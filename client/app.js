@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       //form values to create json object
       const title = document.getElementById('documentTitle').value;
       const author = document.getElementById('documentAuthor').value;
+      const year = document.getElementById('documentYear').value;
       const link = document.getElementById('documentLink').value;
       const journal = document.getElementById('documentJournal').value;
       const volumepage = document.getElementById('documentVolumePage').value;
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       const newDocument ={
         title: title,
         author: author,
+        year: year,
         link: link,
         journal: journal,
         volumepage: volumepage,
@@ -152,20 +154,23 @@ document.addEventListener('DOMContentLoaded', () =>{
           const cellAuthor = newRow.insertCell(1);
           cellAuthor.textContent = doc.author;
 
-          const cellLink = newRow.insertCell(2);
+          const cellYear = newRow.insertCell(2);
+          cellYear.textContent = doc.year;
+
+          const cellLink = newRow.insertCell(3);
           cellLink.textContent = doc.link;
 
-          const cellJournal = newRow.insertCell(3);
+          const cellJournal = newRow.insertCell(4);
           cellJournal.textContent = doc.journal;
 
-          const cellVolumePage = newRow.insertCell(4);
+          const cellVolumePage = newRow.insertCell(5);
           cellVolumePage.textContent = doc.volumepage;
 
-          const cellProgress = newRow.insertCell(5);
+          const cellProgress = newRow.insertCell(6);
           cellProgress.textContent = doc.progress;
           cellProgress.classList.add(progressClassName);
 
-          const cellActions = newRow.insertCell(6);
+          const cellActions = newRow.insertCell(7);
 
           const cellEditButton = document.createElement('button');
           cellEditButton.className = 'small-edit-button';
@@ -220,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
         const newTitle = prompt('Enter new title:', editTargetDocument.title);
         const newAuthor = prompt('Enter new author:', editTargetDocument.author);
+        const newYear = prompt('Enter new year:', editTargetDocument.year);
         const newLink = prompt('Enter new link:', editTargetDocument.link);
         const newJournal = prompt('Enter new journal:', editTargetDocument.journal);
         const newVolumePage = prompt('Enter new Volume,Page:', editTargetDocument.volumepage);
@@ -228,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         const updatedDocument ={
           title: newTitle,
           author: newAuthor,
+          year: newYear,
           link: newLink,
           journal: newJournal,
           volumepage: newVolumePage,
