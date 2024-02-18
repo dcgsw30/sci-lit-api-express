@@ -8,8 +8,6 @@
     background-image: url(/public/styles/images/Colourful.png);
 }
 
-
-
 header {
     color: #333;
     padding: 1em 4%; 
@@ -373,7 +371,7 @@ select {
   margin: 0 auto; 
 }
 
-#citationTable{
+#scrollableContainerCitation {
   height: 500px;
   width: 100%;
   overflow-y: auto;
@@ -381,6 +379,11 @@ select {
   border: 2px solid #000;
 }
 
-#citationTable tr {
-  height: 30px; 
+#citationTable td {
+  padding: 15px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }

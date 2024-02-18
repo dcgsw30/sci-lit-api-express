@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const literatureTbody = document.getElementById('literatureListContainer');
         const rows = literatureTbody.getElementsByTagName('tr'); 
         const citationListBody = document.getElementById('citationListContainer');
+        const citationOption = document.getElementById('citationStyle');
 
+        citationListBody.innerHTML = '';
 
         for (let i = 0; i < rows.length; i++) {
             const dataCells = rows[i].getElementsByTagName('td');
@@ -19,9 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const journal = dataCells[4].innerText;
             const page = dataCells[5].innerText;
             
-            const citation = `${author}.${year}.${title}. ${journal}, ${page}. ${doi}.`
+            const citation = `${author}. (${year}).${title}. ${journal}, ${page}. ${doi}.`
             const newRow = citationListBody.insertRow();
-            newRow.textContent = citation;
+            const newCell = newRow.insertCell(0);
+            newCell.textContent = citation;
         }
 
     });
