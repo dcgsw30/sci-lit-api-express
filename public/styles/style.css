@@ -22,9 +22,9 @@ header {
   }
 
   #logo {
-    width: 210px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 80px; /* Limit the maximum height as needed */
+    width: 210px; 
+    height: auto; 
+    max-height: 80px; 
   }
 
 nav {
@@ -58,17 +58,17 @@ main {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  text-align: center; /* Center the text */
+  text-align: center; 
 }
 
 #landing-text {
   max-width: 800px;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto; 
 }
 
 .section-heading {
-  color: #3E5DD2; /* White text color */
-  font-size: 60px; /* Adjust the font size */
+  color: #3E5DD2; 
+  font-size: 60px; 
   line-height: 1.5;
   margin-bottom: 25px;
 }
@@ -149,7 +149,7 @@ h1 .type4{
 }
 
 a:visited {
-  color: #000000; /* Change the link color after clicking */
+  color: #000000; 
 }
 /*about*/
 #about{
@@ -162,26 +162,26 @@ a:visited {
 }
 
 #about-container {
-  display: flex; /* Use flexbox */
-  justify-content: space-between; /* Space items evenly along the main axis */
-  align-items: center; /* Center items along the cross axis */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
 }
 
 #about-text {
-  flex: 1; /* Take up remaining space */
-  max-width: 60%; /* Adjust the maximum width for text */
+  flex: 1;
+  max-width: 60%; 
   font-size: 22px; 
 }
 
 #about-image {
-  flex: 1; /* Take up remaining space */
-  max-width: 40%; /* Adjust the maximum width for the image */
+  flex: 1; 
+  max-width: 40%; 
 }
 
 #about-image img {
-  width: 100%; /* Make the image fill its container */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+  width: 100%; 
+  height: auto; 
+  border-radius: 10px; 
 }
 
 #about-image {
@@ -206,18 +206,18 @@ a:visited {
 
 #actions {
   margin-top: 20px;
-  max-width: 100%; /* Set the max-width to 100% to span the entire screen */
-  margin: 0 auto; /* Center the container */
+  max-width: 100%; 
+  margin: 0 auto; 
 }
 
 .action-row {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  border: 2px solid white; /* Set initial border color */
-  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
-  transition: background-color 1s ease; /* Add a smooth transition effect for the border color */
-  padding: 20px; /* Add more padding for separation */
+  border: 2px solid white; 
+  border-radius: 10px; 
+  transition: background-color 1s ease; 
+  padding: 20px; 
 }
 
 .action-row:hover {
@@ -232,13 +232,13 @@ a:visited {
 
 .action-title {
   color: #3E5DD2;
-  text-align: left; /* Align the titles to the left of the screen */
+  text-align: left; 
 }
 
 .action-form {
   flex: 1;
-  margin-top: 10px; /* Add top margin for separation */
-  align-self: stretch; /* Ensure the form takes full width within the container */
+  margin-top: 10px; 
+  align-self: stretch; 
 }
 
 label,
@@ -246,8 +246,8 @@ input,
 select,
 textarea,
 button {
-  width: 100%; /* Make form elements take full width */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
 button {
@@ -266,7 +266,7 @@ button:hover {
 
 input[type="text"],
 select {
-  width: 100%; /* Make input fields and select boxes full-width */
+  width: 100%; 
   padding: 8px;
   margin: 6px 0;
   box-sizing: border-box;
@@ -285,14 +285,14 @@ select {
 }
 
 #documentTable {
-  width: 150%; /* Adjust the percentage as needed */
+  width: 150%; 
   table-layout: fixed;
 }
 
 
 #documentTable thead {
-  background-color: #C0D7FB; /* Header background color */
-  color: black; /* Header text color */
+  background-color: #C0D7FB; 
+  color: black; 
   border-bottom: 2px solid #000;
   position: sticky;
   top: 0;
@@ -312,11 +312,11 @@ select {
 #documentTable td:nth-child(6),
 #documentTable td:nth-child(7),
 #documentTable td:nth-child(8) {
-  width: 12.5%; /* Adjust the percentage for each column as needed */
+  width: 12.5%; 
 }
 
 #documentTable tbody tr:hover {
-  background-color: #bcebb9; /* Highlight on hover */
+  background-color: #bcebb9; 
 }
 
 #documentTable th, #documentTable td {

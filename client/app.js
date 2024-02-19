@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () =>{
       const year = document.getElementById('documentYear').value;
       const link = document.getElementById('documentLink').value;
       const journal = document.getElementById('documentJournal').value;
-      const volumepage = document.getElementById('documentVolumePage').value;
+      const volume = document.getElementById('documentVolume').value;
+      const page = document.getElementById('documentPage').value;
       const progress = document.getElementById('readingProgress').value;
   
       const newDocument ={
@@ -26,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () =>{
         year: year,
         link: link,
         journal: journal,
-        volumepage: volumepage,
+        volume: volume,
+        page: page,
         progress: progress
       };
 
@@ -35,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () =>{
       fetch('http://localhost:3000/documents',{
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json' // indicate that we are sending json
+          'Content-Type': 'application/json' 
         },
-        body: JSON.stringify(newDocument), // convert json object to JSON string
+        body: JSON.stringify(newDocument), 
       })
       .then(response => {
         console.log('Response Status:', response.status);
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         serverUrlQuery = `${serverUrl}?progress=${queryTerm}`;
       } else {
         serverUrl = 'http://localhost:3000/documents/search';
-        serverUrlQuery = `${serverUrl}?link=${queryTerm}`;
+        serverUrlQuery = `${serverUrl}?title=${queryTerm}`;
       }
     
       try {
@@ -163,14 +165,17 @@ document.addEventListener('DOMContentLoaded', () =>{
           const cellJournal = newRow.insertCell(4);
           cellJournal.textContent = doc.journal;
 
-          const cellVolumePage = newRow.insertCell(5);
-          cellVolumePage.textContent = doc.volumepage;
+          const cellVolume = newRow.insertCell(5);
+          cellVolume.textContent = doc.volume;
 
-          const cellProgress = newRow.insertCell(6);
+          const cellPage = newRow.insertCell(6);
+          cellPage.textContent = doc.page;
+
+          const cellProgress = newRow.insertCell(7);
           cellProgress.textContent = doc.progress;
           cellProgress.classList.add(progressClassName);
 
-          const cellActions = newRow.insertCell(7);
+          const cellActions = newRow.insertCell(8);
 
           const cellEditButton = document.createElement('button');
           cellEditButton.className = 'small-edit-button';
@@ -202,9 +207,14 @@ document.addEventListener('DOMContentLoaded', () =>{
         const rowIndex = event.target.closest('tr').rowIndex;
         const documentIndex = rowIndex - 1;
         const retrievedDocuments = await fetchDocumentHelper();
+
+        if (!Array.isArray(retrievedDocuments)) {
+          throw new Error('Invalid data retrieved from the server');
+        }
+
         const deleteTargetDocument = retrievedDocuments[documentIndex];
 
-        const documentsAfterDelete = await deleteDocument(deleteTargetDocument.link);
+        const documentsAfterDelete = await deleteDocument(deleteTargetDocument.title);
         displayAllDocuments(documentsAfterDelete);
 
       } catch (error){
@@ -223,25 +233,26 @@ document.addEventListener('DOMContentLoaded', () =>{
 
         console.log('Going to udpate the original file:', editTargetDocument);
 
-        const newTitle = prompt('Enter new title:', editTargetDocument.title);
         const newAuthor = prompt('Enter new author:', editTargetDocument.author);
         const newYear = prompt('Enter new year:', editTargetDocument.year);
         const newLink = prompt('Enter new link:', editTargetDocument.link);
         const newJournal = prompt('Enter new journal:', editTargetDocument.journal);
-        const newVolumePage = prompt('Enter new Volume,Page:', editTargetDocument.volumepage);
+        const newVolume = prompt('Enter new volume:', editTargetDocument.volume);
+        const newPage = prompt('Enter new page range:', editTargetDocument.page);
         const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed', editTargetDocument.progress);
 
         const updatedDocument ={
-          title: newTitle,
+          title: editTargetDocument.title,
           author: newAuthor,
           year: newYear,
           link: newLink,
           journal: newJournal,
-          volumepage: newVolumePage,
+          volume: newVolume,
+          page: newPage,
           progress: newProgress
         };
 
-        const updateResponse = await updateDocument(editTargetDocument.link, updatedDocument);
+        const updateResponse = await updateDocument(editTargetDocument.title, updatedDocument);
         displayAllDocuments(updateResponse);
 
       } catch (error) {
@@ -264,8 +275,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     };
 
     //DELETE request helper, delete the data in the server and returns updated list
-    const deleteDocument = async (targetDocumentLink) =>{
-      const deleteRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+    const deleteDocument = async (targetDocumentTitle) =>{
+      const deleteRoute = `http://localhost:3000/documents/${targetDocumentTitle}`;
       try{
         const response = await fetch (deleteRoute, {
           method: 'DELETE',
@@ -284,8 +295,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
 
     //PUT request helper, edits the data in the server and returns updated list
-    const updateDocument = async (targetDocumentLink, updatedDocument) =>{
-      const updateRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+    const updateDocument = async (targetDocumentTitle, updatedDocument) =>{
+      const updateRoute = `http://localhost:3000/documents/${targetDocumentTitle}`;
       try{
         const response = await fetch (updateRoute, {
           method: 'PUT',
