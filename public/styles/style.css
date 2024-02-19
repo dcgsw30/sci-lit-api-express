@@ -5,9 +5,8 @@
     margin: 0;
     padding: 0;
     font-family: Montserrat, sans-serif;
+    background-image: url(/public/styles/images/Colourful.png);
 }
-
-
 
 header {
     color: #333;
@@ -23,9 +22,9 @@ header {
   }
 
   #logo {
-    width: 210px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 80px; /* Limit the maximum height as needed */
+    width: 210px; 
+    height: auto; 
+    max-height: 80px; 
   }
 
 nav {
@@ -44,7 +43,6 @@ color: #3498db;
 }
 
 main {
-    margin-top: 80px; /* Adjust the margin based on your header height */
     padding: 2em;
     max-width: 100%;
 }
@@ -52,58 +50,107 @@ main {
 /*landing*/
 
 #landing {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto; /* Center the container and add space around it */
-  }
-
-#landing-text {
-    max-width: 400px;
-    margin-right: 50px;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-color: #C0D7FB;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center; 
 }
 
-.section-heading::before {
-    content: "";
-    position: absolute;
-    top: -5px; /* Adjust the position of the bar */
-    left: 0; /* Set left to 0 to span the entire width */
-    width: 100%; /* Set width to 100% to span the entire width */
-    height: 3px; /* Adjust the height of the bar */
-    background-color: #3498db; 
+#landing-text {
+  max-width: 800px;
+  margin: 0 auto; 
 }
 
 .section-heading {
-    color: #333;
-    font-size: 24px;
-    line-height: 1.3;
-    margin-bottom: 10px;
+  color: #3E5DD2; 
+  font-size: 60px; 
+  line-height: 1.5;
+  margin-bottom: 25px;
 }
 
-/* landing page*/
-
-#landing-image {
-    max-width: 600px;
-    max-height: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow added */
+#landing-text h1{
+  color: #647494;
 }
 
-.use-button {
+.c1{
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #3498db; /* You can change the background color */
-  color: #fff; /* You can change the text color */
-  border-radius: 50px; /* Use a high value to create a pill shape */
-  text-decoration: none;
-  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  color: #647494;
+}
+.c2{
+  display: inline-block;
+  color: #647494;
+}
+.c3{
+  display: inline-block;
+  color: #647494;
+}
+.c4{
+  display: inline-block;
+  color: #6555E7;
 }
 
-.use-button:hover {
-  background-color: #ea7b04; /* Change the background color on hover */
+h1{
+  font-size: 2.8rem;
+  margin-top: 1%;
+}
+h1 .type{
+    font-size: 2.5rem;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap; 
+    width: 0;
+    animation: 
+      typing 1.5s steps(30, end) forwards;
+}
+h1 .type2{
+    font-size: 2.5rem; 
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap; 
+    width: 0;
+    animation: 
+      typing 1.5s steps(30, end) forwards;
+    animation-delay: 1.5s;
+}
+h1 .type3{
+    font-size: 2.5rem; 
+    overflow: hidden;
+    border-right: .15em solid orange; 
+    white-space: nowrap; 
+    width: 0;
+    animation: 
+      typing 2s steps(30, end) forwards;
+    animation-delay: 3s;
+}
+h1 .type4{
+  font-size: 2.5rem; 
+  overflow: hidden;
+  margin-top: 6%;
+  border-right: .15em solid orange; 
+  white-space: nowrap; 
+  width: 0;
+  animation: 
+      typing 2s steps(30, end) forwards,
+      blink .75s infinite;
+  animation-delay: 5.5s;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink {
+  from { border-color: transparent }
+  to { border-color: orange; }
 }
 
+a:visited {
+  color: #000000; 
+}
 /*about*/
 #about{
     margin-top: 100px;
@@ -115,37 +162,66 @@ main {
 }
 
 #about-container {
-    max-width: 500px;
-    width: 80%;
-    text-align: center;
-    padding: 20px;
-    margin: 0 auto;
-    border: 2px solid #ff9800; /* Set border properties */
-    border-radius: 10px; /* Optional: Add border-radius for rounded corners */
-  }
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+}
 
-  #about-text {
-    font-size: 18px;
-    line-height: 1.6;
-  }
+#about-text {
+  flex: 1;
+  max-width: 60%; 
+  font-size: 22px; 
+}
 
+#about-image {
+  flex: 1; 
+  max-width: 40%; 
+}
+
+#about-image img {
+  width: 100%; 
+  height: auto; 
+  border-radius: 10px; 
+}
+
+#about-image {
+  animation: floatAnimation 3s infinite alternate ease-in-out;
+}
+
+@keyframes floatAnimation {
+  0% {
+      transform: translateY(0);
+  }
+  100% {
+      transform: translateY(-20px);
+  }
+}
 /*actions*/
 .actions-heading {
-  color: #0088a9;
+  color: #3E5DD2;
   margin-bottom: 20px;
   text-align: center;
+  font-size: 60px;
 }
 
 #actions {
   margin-top: 20px;
-  max-width: 100%; /* Set the max-width to 100% to span the entire screen */
-  margin: 0 auto; /* Center the container */
+  max-width: 100%; 
+  margin: 0 auto; 
 }
 
 .action-row {
   margin-bottom: 20px;
   display: flex;
-  flex-direction: column; /* Adjust the flex-direction to column */
+  flex-direction: column;
+  border: 2px solid white; 
+  border-radius: 10px; 
+  transition: background-color 1s ease; 
+  padding: 20px; 
+}
+
+.action-row:hover {
+  background-color: #ffdbd2; 
 }
 
 .actions-container {
@@ -155,14 +231,14 @@ main {
 }
 
 .action-title {
-  color: #3498db;
-  text-align: left; /* Align the titles to the left of the screen */
+  color: #3E5DD2;
+  text-align: left; 
 }
 
 .action-form {
   flex: 1;
-  margin-top: 10px; /* Add top margin for separation */
-  align-self: stretch; /* Ensure the form takes full width within the container */
+  margin-top: 10px; 
+  align-self: stretch; 
 }
 
 label,
@@ -170,16 +246,16 @@ input,
 select,
 textarea,
 button {
-  width: 100%; /* Make form elements take full width */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
 button {
-  background-color: #3498db;
+  background-color: #3E5DD2;
   color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
-  border: 2px solid #3498db;
+  border: 2px solid #3E5DD2;
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
@@ -190,7 +266,7 @@ button:hover {
 
 input[type="text"],
 select {
-  width: 100%; /* Make input fields and select boxes full-width */
+  width: 100%; 
   padding: 8px;
   margin: 6px 0;
   box-sizing: border-box;
@@ -202,31 +278,53 @@ select {
 /*responses*/
 
 #scrollableContainer {
-  height: 300px;
+  height: 500px;
   overflow-y: auto;
   font-size: 20px;
+  border: 2px solid #000;
 }
 
 #documentTable {
-  width: 100%;
-  border-collapse: collapse;
+  width: 150%; 
+  table-layout: fixed;
 }
+
 
 #documentTable thead {
-  background-color: #3498db; /* Header background color */
-  color: #fff; /* Header text color */
+  background-color: #C0D7FB; 
+  color: black; 
+  border-bottom: 2px solid #000;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
-#documentTable th {
-  padding: 15px;
-  text-align: left;
-  font-weight: bold;
-  width: calc(100% / 7); /* Divide the width equally among the 6 columns */
+#documentTable th, #documentTable td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#documentTable th:nth-child(1),
+#documentTable td:nth-child(2),
+#documentTable td:nth-child(3),
+#documentTable td:nth-child(4),
+#documentTable td:nth-child(5),
+#documentTable td:nth-child(6),
+#documentTable td:nth-child(7),
+#documentTable td:nth-child(8) {
+  width: 12.5%; 
 }
 
 #documentTable tbody tr:hover {
-  background-color: #bcebb9; /* Highlight on hover */
+  background-color: #bcebb9; 
 }
+
+#documentTable th, #documentTable td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd; 
+}
+
 /* response rows*/
 
 .small-edit-button,
@@ -255,4 +353,37 @@ select {
 
 .odd{
   background-color: #ffffff;
+}
+
+#documentTable thead th {
+  font-size: 14px; 
+}
+
+#documentTable tbody {
+  font-size: 12px; 
+}
+
+/* Citation section*/
+
+#generateCitations {
+  text-align: center;
+  max-width: 200px; 
+  margin: 0 auto; 
+}
+
+#scrollableContainerCitation {
+  height: 500px;
+  width: 100%;
+  overflow-y: auto;
+  font-size: 20px;
+  border: 2px solid #000;
+}
+
+#citationTable td {
+  padding: 15px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }

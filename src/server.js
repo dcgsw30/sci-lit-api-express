@@ -19,15 +19,15 @@ app.get('/documents', (req, res, next) =>{
   res.json(documents);
 });
 
-// Search for Literature by DOI
+// Search for Literature by Title
 app.get('/documents/search', (req, res, next) =>{
-  const providedLink = req.query.link;
+  const providedTitle = req.query.title;
 
-  if(!providedLink){
+  if(!providedTitle){
     return res.status(400).send('No input found')
   }
 
-  const wantedDocument = documents.find((document) => document.link === providedLink);
+  const wantedDocument = documents.find((document) => document.title=== providedTitle);
 
   if (!wantedDocument){
     return res.status(400).send('Document not found')
@@ -63,22 +63,22 @@ app.post('/documents', (req, res, next) =>{
 });
 
 // Delete New Literature
-app.delete('/documents/:link', (req, res, next) => {
-  const documentLink = req.params.link;
-  const removedDocument = documents.find((document) => document.link === documentLink);
+app.delete('/documents/:title', (req, res, next) => {
+  const documentTitle = req.params.title;
+  const removedDocument = documents.find((document) => document.title === documentTitle);
 
   if (!removedDocument){
-    return res.status(404).send(`No document with link/doi: ${documentLink}`)
+    return res.status(404).send(`No document with title: ${documentTitle}`)
   }
-  documents = documents.filter((document) => document.link !== documentLink);
+  documents = documents.filter((document) => document.title !== documentTitle);
   res.json(documents);
 });
 
-app.put('/documents/:link', (req, res, next) =>{
-  const linkToUpdate = req.params.link;
+app.put('/documents/:title', (req, res, next) =>{
+  const titleToUpdate = req.params.title;
   const updatedDocument = req.body;
 
-  const documentToUpdate = documents.find((doc) => doc.link === linkToUpdate);
+  const documentToUpdate = documents.find((doc) => doc.title === titleToUpdate);
 
   if(!documentToUpdate){
     return res.status(404).send('Document not found');

@@ -10,7 +10,7 @@
 
 <body>
   <header>
-    <img id="logo" src="styles/images/Sci-Lit-Logo.png">
+    <img id="logo" src="styles/images/Logo2.png">
     <nav>
       <a href="#about">About</a>
       <a href="#actions"> Use Tool</a>
@@ -19,27 +19,28 @@
   <main>
     <section id="landing">
         <div id="landing-text">
-            <h2 class="section-heading">The Best Scientific Literature Manager</h2>
-            <p>Your platform for exploring and managing scientific literature.</p>
-            <a href="#actions" class="use-button">Use Now!</a>
+            <h2 class="section-heading">Welcome to a new age of scientific research</h2>
+            <h1>SciLit can help you<br></br><div class="c1"><div class="type">Manage your scientific literature</div></div>
+            </br>
+            <div class="c2"><div class="type2">Track reading progress</div></div></br>
+            <div class="c3"><div class="type3">Generate citations for publication</div></div><br></br>
+            <div class="c4"><div class="type4"><a href="#actions">Get started today &#11013</a></div></div></h1>
         </div>
-        <img id="landing-image" src="styles/images/Reading image.jpg" alt="SciLit Image">
     </section>
     <section id="about">
       <h2 class="section-heading">About The SciLit Application</h2>
       <div id="about-container">
           <div id="about-text">
-              <p> In the secluded valley, where whispers of ancient trees
-                 intertwined with the melody of a bubbling brook, a mysterious 
-                 energy lingered. Illuminated by the soft glow of fireflies, 
-                 the night unveiled secrets hidden in the tapestry of shadows.
-                  A lone wolf, its fur glistening in the moonlight, prowled with calculated grace. 
-                  Meanwhile, a solitary figure, cloaked in mystery, 
-                  traced constellations with nimble fingers. In the distance, a forgotten ruin stood as a 
-                  testament to the passage of time. The air carried the scent of wildflowers, painting the nocturnal 
-                  canvas with fragrant hues. Nature's nocturnal symphony orchestrated a mesmerizing dance beneath the 
-                  celestial dome.
+              <p> We know, citing papers can be a pain! With so many different citation styles (and many professors that are ready to dock off citation marks),
+                it's very important to cite your papers properly. Sci-lit is the perfect application for your homework, research, or general reading needs! Just enter 
+                details such as the book title, date, and doi, and the application will store your reading information list on a server- available for you to use anytime! The application 
+                also has extra features, such as colour coding, so you know your reading progress for each paper. Whenever you're done creating your reading list, choose your 
+                citation style and generate your citation. At this moment, the application only has APA and MLA, which are common citation styles used in research, but more styles are 
+                coming. Happy researching!
               </p>
+          </div>
+          <div id="about-image">
+            <img src="styles/images/research.png" alt="Research image">
           </div>
       </div>
     </section>
@@ -57,21 +58,25 @@
             <br>
             <input type="text" id="documentAuthor" name="documentAuthor" required>
             <br>
+            <label for="documentYear">Year of Publication:</label>
+            <br>
+            <input type="text" id="documentYear" name="documentYear" required>
+            <br>
             <label for="documentLink">DOI/Link:</label>
             <br>
             <input type="text" id="documentLink" name="documentLink" required>
             <br>
-            <label for="documentType">Document Type:</label>
+            <label for="documentJournal">Journal:</label>
             <br>
-            <select id="documentType" required>
-              <option value="Book">Book</option>
-              <option value="Journal">Journal</option>
-              <option value="Other">Other</option>
-            </select>
+            <input type="text" id="documentJournal" name="documentJournal" required>
             <br>
-            <label for="documentAssignment">Assignment:</label>
+            <label for="documentVolume">Volume:</label>
             <br>
-            <input type="text" id="documentAssignment" name="documentAssignment" required>
+            <input type="text" id="documentVolume" name="documentVolume" required>
+            <br>
+            <label for="documentPage">Page range:</label>
+            <br>
+            <input type="text" id="documentPage" name="documentPage" required>
             <br>
             <label for="readingProgress">Reading Progress:</label>
             <br>
@@ -80,7 +85,6 @@
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed!</option>
             </select>
-            <!-- <textarea id="documentNotes" name="documentNotes" rows="4" cols="50"></textarea> -->
             <br>
             <button type="submit">Add Document</button>
           </form>
@@ -88,8 +92,7 @@
 
         <div class="action-row" id="searchLiterature">
           <h2 class="action-title">Search for Entries &#128269;</h2>
-          <h4>Note! All links should be unique</h4>
-          <label for="searchInput">Enter DOI/Link:</label>
+          <label for="searchInput">Enter Title:</label>
           <br>
           <input type="text" id="searchInput" required>
           <br>
@@ -124,21 +127,48 @@
             <tr>
               <th>Title &#128214</th>
               <th>Author &#128100</th>
+              <th>Publication Year &#128197</th>
               <th>DOI/Link &#128206</th>
-              <th>Type  &#x2753</th>
-              <th>Assignment &#129299</th>
+              <th>Journal  &#x2753</th>
+              <th>Volume &#129299</th>
+              <th>Pages &#129299</th>
               <th>Progress &#128221</th>
-              <th>Action &#128295</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody id="literatureListContainer"></tbody>
         </table>
       </div>
     </section>
+
+    <section id="generateCitations">
+      <br></br>
+      <br></br>
+      <br></br>
+      <p id="generateCitationText">I want to generate my citations in 
+        <select id="citationStyle">
+          <option value="apa">APA</option>
+          <option value="mla">MLA</option>
+        </select>
+      </p>
+      <button id="citationButton">Generate now!</button>
+    </section>
+
+    <section class="responses" id="citationList">
+      <br></br>
+      <h2>Citation Results</h2>
+      <div id="scrollableContainerCitation">
+        <table id="citationTable">
+          <tbody id="citationListContainer"></tbody>
+        </table>
+      </div>
+    </section>
+
   </main>
 
 
   <script src="../client/app.js"></script>
+  <script src="script.js"></script>
 
 </body>
 

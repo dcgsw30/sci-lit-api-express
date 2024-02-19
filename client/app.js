@@ -14,17 +14,21 @@ document.addEventListener('DOMContentLoaded', () =>{
       //form values to create json object
       const title = document.getElementById('documentTitle').value;
       const author = document.getElementById('documentAuthor').value;
+      const year = document.getElementById('documentYear').value;
       const link = document.getElementById('documentLink').value;
-      const type = document.getElementById('documentType').value;
-      const assignment = document.getElementById('documentAssignment').value;
+      const journal = document.getElementById('documentJournal').value;
+      const volume = document.getElementById('documentVolume').value;
+      const page = document.getElementById('documentPage').value;
       const progress = document.getElementById('readingProgress').value;
   
       const newDocument ={
         title: title,
         author: author,
+        year: year,
         link: link,
-        type: type,
-        assignment: assignment,
+        journal: journal,
+        volume: volume,
+        page: page,
         progress: progress
       };
 
@@ -33,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () =>{
       fetch('http://localhost:3000/documents',{
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json' // indicate that we are sending json
+          'Content-Type': 'application/json' 
         },
-        body: JSON.stringify(newDocument), // convert json object to JSON string
+        body: JSON.stringify(newDocument), 
       })
       .then(response => {
         console.log('Response Status:', response.status);
@@ -99,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         serverUrlQuery = `${serverUrl}?progress=${queryTerm}`;
       } else {
         serverUrl = 'http://localhost:3000/documents/search';
-        serverUrlQuery = `${serverUrl}?link=${queryTerm}`;
+        serverUrlQuery = `${serverUrl}?title=${queryTerm}`;
       }
     
       try {
@@ -152,20 +156,26 @@ document.addEventListener('DOMContentLoaded', () =>{
           const cellAuthor = newRow.insertCell(1);
           cellAuthor.textContent = doc.author;
 
-          const cellLink = newRow.insertCell(2);
+          const cellYear = newRow.insertCell(2);
+          cellYear.textContent = doc.year;
+
+          const cellLink = newRow.insertCell(3);
           cellLink.textContent = doc.link;
 
-          const cellType = newRow.insertCell(3);
-          cellType.textContent = doc.type;
+          const cellJournal = newRow.insertCell(4);
+          cellJournal.textContent = doc.journal;
 
-          const cellAssignment = newRow.insertCell(4);
-          cellAssignment.textContent = doc.assignment;
+          const cellVolume = newRow.insertCell(5);
+          cellVolume.textContent = doc.volume;
 
-          const cellProgress = newRow.insertCell(5);
+          const cellPage = newRow.insertCell(6);
+          cellPage.textContent = doc.page;
+
+          const cellProgress = newRow.insertCell(7);
           cellProgress.textContent = doc.progress;
           cellProgress.classList.add(progressClassName);
 
-          const cellActions = newRow.insertCell(6);
+          const cellActions = newRow.insertCell(8);
 
           const cellEditButton = document.createElement('button');
           cellEditButton.className = 'small-edit-button';
@@ -197,9 +207,14 @@ document.addEventListener('DOMContentLoaded', () =>{
         const rowIndex = event.target.closest('tr').rowIndex;
         const documentIndex = rowIndex - 1;
         const retrievedDocuments = await fetchDocumentHelper();
+
+        if (!Array.isArray(retrievedDocuments)) {
+          throw new Error('Invalid data retrieved from the server');
+        }
+
         const deleteTargetDocument = retrievedDocuments[documentIndex];
 
-        const documentsAfterDelete = await deleteDocument(deleteTargetDocument.link);
+        const documentsAfterDelete = await deleteDocument(deleteTargetDocument.title);
         displayAllDocuments(documentsAfterDelete);
 
       } catch (error){
@@ -218,23 +233,26 @@ document.addEventListener('DOMContentLoaded', () =>{
 
         console.log('Going to udpate the original file:', editTargetDocument);
 
-        const newTitle = prompt('Enter new title:', editTargetDocument.title);
         const newAuthor = prompt('Enter new author:', editTargetDocument.author);
+        const newYear = prompt('Enter new year:', editTargetDocument.year);
         const newLink = prompt('Enter new link:', editTargetDocument.link);
-        const newType = prompt('Enter new type: Choose Book, Journal, or Other', editTargetDocument.type);
-        const newAssignment = prompt('Enter new assignment:', editTargetDocument.assignment);
+        const newJournal = prompt('Enter new journal:', editTargetDocument.journal);
+        const newVolume = prompt('Enter new volume:', editTargetDocument.volume);
+        const newPage = prompt('Enter new page range:', editTargetDocument.page);
         const newProgress = prompt('Enter new progress: Choose Not Started, In Progress, or Completed', editTargetDocument.progress);
 
         const updatedDocument ={
-          title: newTitle,
+          title: editTargetDocument.title,
           author: newAuthor,
+          year: newYear,
           link: newLink,
-          type: newType,
-          assignment: newAssignment,
+          journal: newJournal,
+          volume: newVolume,
+          page: newPage,
           progress: newProgress
         };
 
-        const updateResponse = await updateDocument(editTargetDocument.link, updatedDocument);
+        const updateResponse = await updateDocument(editTargetDocument.title, updatedDocument);
         displayAllDocuments(updateResponse);
 
       } catch (error) {
@@ -257,8 +275,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     };
 
     //DELETE request helper, delete the data in the server and returns updated list
-    const deleteDocument = async (targetDocumentLink) =>{
-      const deleteRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+    const deleteDocument = async (targetDocumentTitle) =>{
+      const deleteRoute = `http://localhost:3000/documents/${targetDocumentTitle}`;
       try{
         const response = await fetch (deleteRoute, {
           method: 'DELETE',
@@ -277,8 +295,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
 
     //PUT request helper, edits the data in the server and returns updated list
-    const updateDocument = async (targetDocumentLink, updatedDocument) =>{
-      const updateRoute = `http://localhost:3000/documents/${targetDocumentLink}`;
+    const updateDocument = async (targetDocumentTitle, updatedDocument) =>{
+      const updateRoute = `http://localhost:3000/documents/${targetDocumentTitle}`;
       try{
         const response = await fetch (updateRoute, {
           method: 'PUT',
