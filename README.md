@@ -8,7 +8,7 @@ The Sci-Lit application has all four basic CRUD operations to create, add, updat
 
 ![Action Box](/public/styles/images/action-boxes.png)
 
-Once the user clicks on the "Add Document" button, the application sends a POST request to the server, and immediately chains that request with a GET request to retrieve all stored documents. All documents will be displayed in the retrieved documents table, including the one we just added!
+Once the user clicks on the "Add Document" button, the application sends a POST request to the server, and immediately chains that request with a GET request to retrieve all stored documents. All documents and their corresponding information will be displayed in the retrieved documents table, including the one we just added! If the user scrolls to the right of the table, there will be 2 red "edit" and "delete" buttons that modifies and deletes literature in the server too.
 
 ![Literature List](/public/styles/images/lit-list.png)
 
