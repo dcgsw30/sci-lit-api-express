@@ -6,9 +6,15 @@ Welcome to my first full-stack personal project, Sci-Lit! Before switching into 
 
 The Sci-Lit application has all four basic CRUD operations to create, add, update, and delete literature data in the server. Let's say the user is reading a paper and wants to add it to the reading collection. The user can simply type all the details of that paper inside one of the action boxes. 
 
+![Action Box](/public/styles/images/action-boxes.png)
+
 Once the user clicks on the "Add Document" button, the application sends a POST request to the server, and immediately chains that request with a GET request to retrieve all stored documents. All documents will be displayed in the retrieved documents table, including the one we just added!
 
+![Literature List](/public/styles/images/lit-list.png)
+
 With the completed list, the user can generate the citations of each paper stored in the list. At this moment, Sci-Lit supports APA and MLA citation styles due to their popularity in academia. 
+
+![Citation List](/public/styles/images/citation-list.png)
 
 ## Learning Experience
 
